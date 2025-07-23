@@ -1,0 +1,275 @@
+<style>
+
+  .hover-container {
+  position: relative;
+  overflow: hidden;
+}
+/* added for overlay */
+.hover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.7); /* Light overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.hover-container:hover .hover-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hover-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: var(--primary-color);
+  text-transform: uppercase;
+}
+
+.read-more {
+  font-weight: 700;
+  font-size: 1.4rem;
+  transition: transform 0.3s ease;
+}
+
+.hover-content:hover .read-more {
+  transform: translateX(5px);
+}
+/* added for overlay */
+
+  
+  .blogs-heading{
+    justify-content: space-between;
+    align-items: center;
+  }
+  .blogs-triple-line{
+    max-width: 80rem;
+    text-align: start;
+  }
+  .blogs-triple-line .triple-line-snippet{
+    align-items: start;
+  }
+   .blogs-grid {
+    display: flex;
+    justify-content: center;
+     gap:2rem;
+  }
+
+  .blogs-item {
+    flex: 1;
+  }
+  .blogs-item {
+    border: 0.5px solid var(--primary-color);
+    /* border-right: none; */
+  }
+
+  .blogs-image img {
+    width: 100%;
+    height: auto;
+    display:block;
+    /* max-height: 55rem; */
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .blogs-content {
+    text-align: left;
+    margin: 1.6rem 4.8rem 0 4.8rem;
+    height: 25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .blogs-title {
+    font-family: 'Gretha', sans-serif;
+    color:var(--primary-color);
+      overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5; /* Limits title to 2 lines */
+    -webkit-box-orient: vertical;
+  }
+
+  .blogs-read-more {
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    gap: 1rem;
+    color:var(--primary-color);
+  }
+
+  .blogs-read-more:hover .arrow {
+    transform: translateX(5px);
+    transition: transform 0.3s ease;
+  }
+
+  .arrow {
+    transition: transform 0.3s ease;
+  }
+
+  @media (max-width: 1024px) {
+    .blogs-triple-line {
+        max-width: 40rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .blogs-heading {
+        gap: 1.5rem;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .blogs-triple-line {
+        max-width: 100%;
+    }
+    .blogs-grid {
+      flex-direction: column;
+      border-right: 0.5px solid var(--primary-color);
+    }
+    .blogs-content{
+      height: 15rem;
+      margin: 1.6rem 1.8rem 0 1.8rem;
+    }
+    .blogs-image img {
+      aspect-ratio: 3 / 2;
+    }
+  }
+</style>
+
+<section class="p48">
+  <div class="blogs-heading mb48 d-flex scroll-trigger animate--slide-in p-mobile">
+    <div class="blogs-triple-line">
+      {% render 'triple-line-snippet',
+        triple_line_sub_title: section.settings.triple_line_sub_title,
+        triple_line_text: section.settings.triple_line_text,
+        triple_line_title: section.settings.triple_line_title
+      %}
+    </div>
+    {% comment %}
+    {% render 'custom-button',
+      button_text: section.settings.button_text,
+      button_link: section.settings.button_link,
+      button_bg_color: 'var(--violet-color)',
+      button_text_color: 'var(--secondary-color)',
+      line_color: 'var(--secondary-color)',
+      border_color: 'var(--secondary-color)',
+      show_second_frame_child: false
+    %}{% endcomment %}
+  </div>
+  <div class="blogs-grid">
+    {% for block in section.blocks %}
+      <div class="blogs-item">
+        <div class="blogs-image hover-container">
+          <a href="{{ block.settings.link }}">
+            <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.title }}">
+            <div class="hover-overlay">
+              <div class="hover-content">
+                <span class="f5 fw700">{{ block.settings.mini_title }}</span>
+                <span class="read-more">Read More →</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        {% comment %}
+        <div class="blogs-content">
+          <h3 class="blogs-title f3 fw600 lh150">{{ block.settings.title }}</h3>
+          <div class="d-flex mb48" style="justify-content: space-between;">
+            <a href="{{ block.settings.link }}" class="blogs-read-more f5 fw700 lh150">{{ block.settings.mini_title }}</a>
+            <a href="{{ block.settings.link }}" class="blogs-read-more f5 fw700 lh150">
+              <div
+                style="
+                  width: 2.4rem;
+                  position: relative;
+                  border-top: 1px solid var(--primary-color);
+                  height: 0.1rem;
+                  display: block !important;
+                "
+              ></div>
+              <span>Read More</span>
+            </a>
+          </div>
+        </div>
+      {% endcomment %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blogs Custom",
+  "settings": [
+    {
+      "type": "text",
+      "id": "triple_line_sub_title",
+      "label": "Subtitle text"
+    },
+
+    {
+      "type": "text",
+      "id": "triple_line_title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "triple_line_text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "VIEW ALL MEDIA"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "blog",
+      "name": "Blog Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Blog Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Blog Title"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Blog Link"
+        },
+        {
+          "type": "text",
+          "id": "mini_title",
+          "label": "Link Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blogs Custom"
+    }
+  ]
+}
+{% endschema %}

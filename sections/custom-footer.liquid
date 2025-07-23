@@ -1,0 +1,429 @@
+<!-- custom-footer.liquid -->
+
+<style>
+  .custom-footer {
+    text-align: center;
+    padding-top:6.4rem;
+    background: #F9F3E7;
+  }
+  .footer-container {
+    /* max-width: 1600px; */
+    /* margin: 0 auto; */
+  }
+  .footer-header{
+    flex-direction: column;
+    max-width: 55rem;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .footer-logo img {
+    width: 16rem;
+  }
+
+  .footer-description {
+    color: var(--primary-color);
+  }
+
+  .footer-form {
+    margin-bottom: 20px;
+  }
+
+  .footer-input {
+    padding: 10px;
+    width: 60%;
+    max-width: 400px;
+    border: 1px solid #ccc;
+  }
+
+  .footer-submit {
+    padding: 1.6rem 2.4rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    gap: 1rem;
+    cursor: pointer;
+    background-color: var(--violet-color);
+    color: var(--secondary-color);
+    border:none;
+    font-family: var(--font-body-family);
+  }
+
+  .footer-social-icons {
+    justify-content:center;
+    gap:2rem;
+  }
+
+  .footer-social-icons a img {
+    width: 30px;
+    margin: 0 10px;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    background:linear-gradient(0deg, rgba(255, 210, 120, 0.20) 0%, rgba(255, 210, 120, 0.20) 100%);
+  }
+
+  .footer-column {
+    flex: 1;
+    padding: 0 15px;
+  }
+
+  .footer-column h4 {
+    margin-bottom: 1.6rem;
+    color:var(--primary-color);
+    font-weight: 500;
+  }
+  .footer-column p{
+    color:var(--primary-color);
+  }
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-column ul li {
+    margin-bottom: 0.6rem;
+  }
+
+  .footer-column ul li a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 400;
+  }
+
+  .footer-copyright {
+    background:linear-gradient(0deg, rgba(255, 210, 120, 0.20) 0%, rgba(255, 210, 120, 0.20) 100%);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    color: var(--primary-color);
+    font-weight: 400;
+  }
+  .newsletter-form__field-wrapper{
+    gap:1rem;
+  }
+  .footer__newsletter{
+    margin: 2.4rem 0;
+  }
+  .footer-bottom-1{
+    flex:1.4;
+    padding: 2.8rem 6.4rem;
+  }
+  .footer-bottom-2{
+    flex:1;
+    padding: 2.8rem 6.4rem;
+  }
+  @media (max-width: 1024px) {
+    .footer-bottom-1, .footer-bottom-2{
+        padding: 2.8rem 2.4rem;
+      }
+    }
+  @media (max-width: 768px) {
+    .footer-links {
+      flex-direction: column;
+      text-align: center;
+    }
+    .footer-column h4{
+      font-weight:600 !important;
+    }
+    .footer-bottom-1{
+      border-right:none;
+      border-bottom:none;
+    }
+    .footer-bottom-1, .footer-bottom-2{
+      flex-direction: column;
+      gap:2rem;
+      padding: 2.8rem 1rem;
+    }
+    .newsletter-form__field-wrapper{
+      flex-direction:column;
+    }
+    .footer-header{
+      padding:1rem;
+    }
+    .footer-submit{
+      justify-content:center;
+    }
+  }
+</style>
+
+<footer class="custom-footer">
+  <div class="footer-container">
+    <!-- Logo Section -->
+    <div class="footer-header d-flex mb48">
+      <div class="footer-logo">
+        <img class="mb12" src="{{ section.settings.logo | img_url: 'master' }}" alt="Footer Logo">
+      </div>
+
+      <!-- Description Text Section -->
+      <p class="footer-description f5 fw400 lh150">{{ section.settings.description }}</p>
+
+      <!-- Email Subscription Form -->
+      {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="newsletter-form__field-wrapper d-flex">
+          <div class="field">
+            <input
+              id="NewsletterForm--{{ section.id }}"
+              type="email"
+              name="contact[email]"
+              class="field__input"
+              value="{{ form.email }}"
+              aria-required="true"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
+              style="height:100%;"
+              {% if form.errors %}
+                autofocus
+                aria-invalid="true"
+                aria-describedby="ContactFooter-error"
+              {% elsif form.posted_successfully? %}
+                aria-describedby="ContactFooter-success"
+              {% endif %}
+              placeholder="{{ 'newsletter.label' | t }}"
+              required
+            >
+            <label class="field__label" for="NewsletterForm--{{ section.id }}">
+              {{ 'newsletter.label' | t }}
+            </label>
+          </div>
+          <button
+            type="submit"
+            name="commit"
+            id="Subscribe"
+            class="footer-submit d-flex fw700 lh150 f5 align-center"
+          >
+            <div class="frame-child" style="border-color:var(--secondary-color)"></div>
+            {{ section.settings.submit_button_text }}
+          </button>
+          {%- if form.errors -%}
+            <small class="newsletter-form__message form__message" id="ContactFooter-error">
+              <span class="svg-wrapper">
+                {{- 'icon-error.svg' | inline_asset_content -}}
+              </span>
+              {{- form.errors.translated_fields.email | capitalize }}
+              {{ form.errors.messages.email -}}
+            </small>
+          {%- endif -%}
+        </div>
+        {%- if form.posted_successfully? -%}
+          <h3
+            class="newsletter-form__message newsletter-form__message--success form__message"
+            id="ContactFooter-success"
+            tabindex="-1"
+            autofocus
+          >
+            <span class="svg-wrapper">
+              {{- 'icon-success.svg' | inline_asset_content -}}
+            </span>
+            {{- 'newsletter.success' | t }}
+          </h3>
+        {%- endif -%}
+      {%- endform -%}
+      <div class="footer-social-icons d-flex">
+        {% for block in section.blocks %}
+          <a href="{{ block.settings.social_link }}" target="_blank" class="social-icon-link">
+            <div class="social-icon" aria-label="{{ block.settings.social_alt_text }}">
+              {{ block.settings.social_svg | raw }}
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Links and Info Section -->
+    <div class="footer-links">
+      <div class="footer-bottom-1 d-flex">
+        <div class="footer-column">
+          <h4 class="f4">{{ section.settings.column1_title }}</h4>
+          <p class="f5 fw400">{{ section.settings.column1_text }}</p>
+        </div>
+        <div class="footer-column">
+          <h4 class="f4">{{ section.settings.column2_title }}</h4>
+          <ul>
+            <li>
+              <a class="f5" href="tel:{{ section.settings.phone }}">{{ section.settings.phone }}</a>
+            </li>
+            <li>
+              <a class="f5" href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
+            </li>
+            <li>
+              <a class="f5" href="{{ section.settings.boutique }}" target="_blank"> {{ section.settings.location }}</a>
+            </li>
+            <li>
+              <a class="f5" href="{{ section.settings.boutique_desc_link }}" target="_blank"> {{ section.settings.location_desc }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom-2 d-flex">
+        <div class="footer-column">
+          <h4 class="f4">{{ section.settings.column3_title }}</h4>
+          <ul>
+            {% for link in linklists[section.settings.column3_menu].links %}
+              <li>
+                <a class="f5" href="{{ link.url }}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4 class="f4">{{ section.settings.column4_title }}</h4>
+          <ul>
+            {% for link in linklists[section.settings.column4_menu].links %}
+              <li>
+                <a class="f5" href="{{ link.url }}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+            <li>
+                <a class="f5" href="/pages/contact">Contact Us</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyright Text -->
+    <div class="footer-copyright">
+      <p class="f5">{{ section.settings.copyright_text }}</p>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Custom Footer",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Footer Logo"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Indulge in the essence of luxury. Stay updated for exclusive access to all things Marushika."
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email Placeholder",
+      "default": "Enter email"
+    },
+    {
+      "type": "text",
+      "id": "submit_button_text",
+      "label": "Submit Button Text",
+      "default": "Submit"
+    },
+    {
+      "type": "text",
+      "id": "column1_title",
+      "label": "Column 1 Title",
+      "default": "Marushika’s Fusion of Art and Fashion"
+    },
+    {
+      "type": "textarea",
+      "id": "column1_text",
+      "label": "Column 1 Text",
+      "default": "Marushika is a brand that emerges from the confluence of art and fashion, dedicated to creating wearable art that transcends both place and time."
+    },
+    {
+      "type": "text",
+      "id": "column2_title",
+      "label": "Column 2 Title",
+      "default": "Our Store"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone number"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email"
+    },
+    {
+      "type": "text",
+      "id": "location",
+      "label": "Location"
+    },
+    {
+      "type": "text",
+      "id": "boutique",
+      "label": "Boutique link"
+    },
+    {
+      "type": "text",
+      "id": "location_desc",
+      "label": "Location desc"
+    },
+    {
+      "type": "text",
+      "id": "boutique_desc_link",
+      "label": "Boutique desc link"
+    },
+    {
+      "type": "text",
+      "id": "column3_title",
+      "label": "Column 3 Title",
+      "default": "Marushika"
+    },
+    {
+      "type": "link_list",
+      "id": "column3_menu",
+      "label": "Select Menu for Column 3"
+    },
+    {
+      "type": "text",
+      "id": "column4_title",
+      "label": "Column 4 Title",
+      "default": "Terms and Conditions"
+    },
+    {
+      "type": "link_list",
+      "id": "column4_menu",
+      "label": "Select Menu for Column 4"
+    },
+    {
+      "type": "textarea",
+      "id": "copyright_text",
+      "label": "Copyright Text",
+      "default": "2024 © Marushika Fashion L.L.C, All rights reserved."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "Social Icon",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "social_svg",
+          "label": "Social Icon SVG Code"
+        },
+        {
+          "type": "url",
+          "id": "social_link",
+          "label": "Social Link"
+        },
+        {
+          "type": "text",
+          "id": "social_alt_text",
+          "label": "Social Icon Alt Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Footer"
+    }
+  ]
+}
+{% endschema %}

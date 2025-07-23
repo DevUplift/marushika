@@ -1,0 +1,33 @@
+<!-- custom-button.liquid -->
+
+<a href="{{ button_link }}" class="custom-button f5 lh150 fw700 d-inflex align-center" style="background-color: {{ button_bg_color }}; color: {{ button_text_color }}; border-color:{{ border_color }}">
+  <div class="frame-child" style="border-color:{{ line_color }}"></div>
+  {{ button_text }}
+  
+  {% if show_second_frame_child %}
+    <div class="frame-child" style="border-color:{{ line_color }}"></div>
+  {% endif %}
+</a>
+
+<style>
+  .custom-button {
+    padding: 1.6rem 2.4rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 0.5px solid;
+    gap: 1rem;
+  }
+
+  .custom-button:hover {
+    opacity: 0.9;
+  }
+
+  .frame-child {
+    width: 2.4rem;
+    position: relative;
+    border-top: 1px solid;
+    height: 0.1rem;
+    display: block !important;
+  }
+</style>

@@ -1,0 +1,123 @@
+<!-- icon-section.liquid -->
+
+<style>
+  .icon-section {
+    padding-top: 0 !important;
+    background-color: #f5f4eb; /* Background color */
+  }
+  
+  .first-icon-layer{
+    background: var(--Foundation-Yellow-yellow-50, #F9F3E7);
+    padding: 1.6rem;
+  }
+  .icon-section-container {
+    padding: 0.8rem;
+    border: 3px solid rgba(35, 25, 33, 0.20);
+  }
+
+  .icon-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    border: 1px solid rgba(35, 25, 33, 0.30);
+    padding: 20px;
+  }
+
+  .icon-item {
+    text-align: center;
+    padding: 20px;
+  }
+
+  .icon-wrapper {
+    margin-bottom: 10px;
+  }
+
+  .icon-svg {
+    width: 40px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .icon-title {
+    font-family: 'Gretha', sans-serif;
+    font-style: italic;
+  }
+
+  .icon-description {
+    margin-top:0.4rem;
+  }
+
+  @media (max-width: 768px) {
+    .icon-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .icon-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<section class="icon-section m48">
+  <div class="first-icon-layer">
+    <div class="icon-section-container">
+      <div class="icon-grid">
+        {% for block in section.blocks %}
+          <div class="icon-item">
+            <div class="icon-wrapper">
+              <!-- Display the SVG directly from the settings -->
+              {% if block.settings['svg-code'] != blank %}
+                <div class="icon-svg">
+                  {{ block.settings['svg-code'] }}
+                </div>
+              {% endif %}
+            </div>
+            <h3 class="icon-title f4 fw600 lh150">{{ block.settings.title }}</h3>
+            <p class="icon-description f5 fw400 lh150">{{ block.settings.description }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Icon Section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "Icon Item",
+      "settings": [
+          {
+          "type": "html",
+          "id": "svg-code",
+          "label": "SVG icon code",
+          "info": "Learn more about adding your own SVG icons [here](https://support.safeasmilk.co/article/236-general-add-custom-svg-icons-to-your-theme)."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Title here"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Description here"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon Section",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}

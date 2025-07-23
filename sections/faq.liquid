@@ -1,0 +1,181 @@
+<style>
+  .faq {
+    text-align: center;
+  }
+
+  .faq__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .faq__title {
+    margin-bottom: 20px;
+  }
+
+  .faq__subtitle {
+    margin-bottom: 30px;
+  }
+
+  .faq__items {
+    text-align: left;
+    margin-top:4.8rem;
+  }
+
+  .faq__item {
+    border-top: 1px solid #ADADAD;
+    padding: 20px 0;
+    position: relative;
+  }
+
+  .faq__checkbox {
+    display: none !important;
+  }
+
+  .faq__question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+
+  .faq__number {
+    margin-right: 10px;
+  }
+
+  .faq__text {
+    color: var(--primary-color);
+    font-family: Gretha, sans-serif;
+    font-style: italic;
+  }
+
+  .faq__icon {
+    display: flex;
+    align-items: center;
+  }
+
+  .faq__icon--close {
+    display: none;
+  }
+
+  .faq__checkbox:checked + .faq__question .faq__icon--open {
+    display: none;
+  }
+
+  .faq__checkbox:checked + .faq__question .faq__icon--close {
+    display: block;
+  }
+
+  .faq__answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.5s ease;
+  }
+
+  .faq__checkbox:checked ~ .faq__answer {
+    max-height: 500px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .faq__answer p {
+    font-size: 1em;
+    margin: 10px 0;
+    color: #4E4E4E;
+    font-size: 16px;
+    line-height: 150%;
+    transition: opacity 0.5s ease;
+  }
+
+  .faq__checkbox:checked ~ .faq__answer p {
+    opacity: 1;
+  }
+</style>
+
+<div class="faq m6048">
+  <div class="faq__container">
+    {% render 'triple-line-snippet',
+      triple_line_sub_title: section.settings.triple_line_sub_title,
+      triple_line_title: section.settings.triple_line_title,
+      triple_line_text: section.settings.triple_line_text
+    %}
+    <div class="faq__items">
+      {% for block in section.blocks %}
+        <div class="faq__item">
+          <input
+            type="checkbox"
+            id="faq_{{ block.id }}"
+            class="faq__checkbox"
+          >
+          <label for="faq_{{ block.id }}" class="faq__question">
+            <div>
+              <span class="faq__number faq__text f3">{{ forloop.index | prepend: '0' }}</span>
+              <span class="faq__text f3">{{ block.settings.question }}</span>
+            </div>
+            <span class="faq__icon">
+              <svg class="faq__icon--open" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                <path d="M8.4375 11.25L15 17.8125L21.5625 11.25" stroke="#231921" stroke-width="2"/>
+              </svg>
+              <svg class="faq__icon--close" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                <path d="M21.5625 18.75L15 12.1875L8.4375 18.75" stroke="#231921" stroke-width="2"/>
+              </svg>
+            </span>
+          </label>
+          <div class="faq__answer">
+            <p>{{ block.settings.answer }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+  {
+    "type": "text",
+    "id": "triple_line_sub_title",
+    "label": "Subtitle text"
+  },
+  {
+    "type": "text",
+    "id": "triple_line_title",
+    "label": "Title text"
+  },
+  {
+    "type": "text",
+    "id": "triple_line_text",
+    "label": "Text"
+  },
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Your Question Here"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Your answer here."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ",
+      "category": "Custom"
+    }
+  ],
+  "max_blocks": 8
+}
+{% endschema %}

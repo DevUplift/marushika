@@ -1,0 +1,163 @@
+<!-- triple-pic-section.liquid -->
+
+<style>
+  .triple-pic-section {
+    text-align: center;
+  }
+  .triple-pic-heading {
+    justify-content: space-between;
+    align-items: center;
+  }
+  .triple-pic-heading-content {
+    max-width: 80rem;
+    text-align: start;
+  }
+  .triple-pic-subtitle {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+  }
+  .triple-pic-title {
+    color: var(--primary-color);
+    font-family: 'Gretha', sans-serif;
+  }
+  .triple-pic-description {
+    color: var(--primary-color);
+  }
+  .triple-pic-grid {
+    display: flex;
+    justify-content: center;
+    gap:2rem;
+  }
+  .triple-pic-item {
+    flex: 1;
+  }
+  .triple-pic-item img, .triple-pic-item video {
+    width: 100%;
+    height: 72rem;
+    object-fit: cover;
+    display: block;
+  }
+  @media (max-width: 1024px) {
+    .triple-pic-heading-content {
+      max-width: 40rem;
+    }
+    .triple-pic-item img, .triple-pic-item video {
+      min-height: 42rem;
+    }
+  }
+  @media (max-width: 768px) {
+    .triple-pic-heading-content {
+      max-width: 100%;
+    }
+    .triple-pic-heading {
+      gap: 1.5rem;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    .triple-pic-item img, .triple-pic-item video {
+      height: 22rem;
+    }
+    .triple-pic-grid{
+      flex-direction: column;
+    }
+  }
+</style>
+
+<section class="triple-pic-section m6048">
+  <div class="triple-pic-container">
+    <div class="triple-pic-heading mb48 d-flex scroll-trigger animate--slide-in p-mobile">
+      <div class="triple-pic-heading-content">
+        <div class="sub-title-section d-inflex align-center f4 fw400 lh150 mb12" style="color:var(--primary-color);">
+          <div class="sub-line-border" style="border-color:var(--primary-color)"></div>
+          <p>{{ section.settings.subtitle }}</p>
+        </div>
+        <h2 class="triple-pic-title f2 fw600 mb12">{{ section.settings.title }}</h2>
+        <p class="triple-pic-description f5 fw400">{{ section.settings.description }}</p>
+      </div>
+      {% render 'custom-button',
+        button_text: section.settings.button_text,
+        button_link: section.settings.button_link,
+        button_bg_color: 'var(--violet-color)',
+        button_text_color: 'var(--secondary-color)',
+        line_color: 'var(--secondary-color)',
+        border_color: 'var(--secondary-color)',
+        show_second_frame_child: false
+      %}
+    </div>
+
+    <div class="triple-pic-grid">
+      <div class="triple-pic-item">
+        <img src="{{ section.settings.image1 | img_url: 'master' }}">
+      </div>
+      <div class="triple-pic-item">
+        <video autoplay muted loop playsinline>
+          <source src="{{ section.settings.video_file1.sources[1].url }}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="triple-pic-item">
+        <img src="{{ section.settings.image3 | img_url: 'master' }}">
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Triple Pic Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "The Art Behind the Outfit"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Craftsmanship and Inspiration"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Our commitment to detailed craftsmanship, the use of premium quality fabrics and advanced hand embroidery techniques ensures that our designs evoke a regal feeling and a unique sense of individuality."
+    },
+      {
+      "type": "image_picker",
+      "id": "image1",
+      "label": "Image 1"
+      },
+      {
+      "type": "video",
+      "id": "video_file1",
+      "label": "Upload Video"
+      },
+      {
+      "type": "image_picker",
+      "id": "image3",
+      "label": "Image 3"
+      },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Know More About Us"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Triple pic section"
+    }
+  ]
+}
+{% endschema %}

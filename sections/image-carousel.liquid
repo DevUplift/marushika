@@ -1,0 +1,123 @@
+<style>
+  .pic-swiper {
+    width: 100%;
+    height: 90rem;
+  }
+  .pic-section{
+    text-align: center;
+  }
+  .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .icons-one-pic{
+    text-align:center;
+    margin-top:6rem;
+    margin-bottom: 2rem;
+  }
+  @media (max-width: 768px) {
+    .icons-one-pic {
+      margin-top:4rem;
+    }
+    .pic-swiper {
+      height: 50rem;
+    }
+  }
+</style>
+
+<section class="pic-section maxp">
+  <div class="mb48">
+    {% render 'triple-line-snippet',
+      triple_line_sub_title: section.settings.triple_line_sub_title,
+      triple_line_text: section.settings.triple_line_text,
+      triple_line_title: section.settings.triple_line_title
+    %}
+  </div>
+
+  <div class="swiper pic-swiper">
+    <div class="swiper-wrapper">
+      {% for block in section.blocks %}
+        {% if block.settings.image %}
+          <div class="swiper-slide">
+            <img src="{{ block.settings.image | img_url: 'master' }}" alt="Slide Image">
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    new Swiper(".pic-swiper", {
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false
+      },
+      speed: 600,
+      slidesPerView: 1,
+      spaceBetween: 0
+    });
+  });
+</script>
+{% render 'book-experience-snippet' %}
+
+<div class="icons-one-pic">
+  <img width="33" src="https://cdn.shopify.com/s/files/1/0664/2404/5740/files/maru-logo.png?v=1728324567">
+  <img width="44" src="https://cdn.shopify.com/s/files/1/0664/2404/5740/files/maru-logo.png?v=1728324567">
+  <img width="33" src="https://cdn.shopify.com/s/files/1/0664/2404/5740/files/maru-logo.png?v=1728324567">
+</div>
+
+{% schema %}
+{
+  "name": "Image slider section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "triple_line_sub_title",
+      "label": "Subtitle text"
+    },
+    {
+      "type": "text",
+      "id": "triple_line_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "triple_line_text",
+      "label": "Text"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Slide Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Slider Section",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

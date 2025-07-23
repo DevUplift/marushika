@@ -1,0 +1,117 @@
+<!-- visionary-section.liquid -->
+
+<style>
+  .visionary-section {
+    display: flex;
+    align-items: center;
+    gap: 4.8rem;
+  }
+  .visionary-image {
+    width: auto;
+  }
+  .visionary-section .visionary-image img {
+    height: auto;
+    width: 100%;
+    max-width: 70rem;
+  }
+
+  .visionary-content {
+    max-width: 40%;
+    padding-left: 2rem;
+    text-align: left;
+  }
+  .visionary-content .triple-line-snippet {
+    align-items: start !important;
+  }
+  .visionary-content .sub-line-2 {
+    display: none !important;
+  }
+
+  @media (max-width: 1000px) {
+    .visionary-image {
+      width: 100%;
+    }
+    .visionary-section .visionary-image img {
+      max-height: 55rem;
+      object-position: top;
+      object-fit: cover;
+      max-width: unset;
+    }
+    .visionary-content {
+      padding-left: 0;
+      max-width: 100%;
+    }
+    .visionary-section {
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+  }
+</style>
+
+<section class="visionary-section m48">
+  <div class="visionary-image">
+    <img src="{{ section.settings.image | img_url: 'master' }}" alt="Visionary Image">
+  </div>
+  <div class="visionary-content">
+    <div class="mb48">
+      {% render 'triple-line-snippet',
+        triple_line_sub_title: section.settings.subtitle,
+        triple_line_title: section.settings.title,
+        triple_line_text: section.settings.description
+      %}
+    </div>
+    <div class="visionary-signature">
+      <img style="width:12rem;" height="auto" alt="signature" src="https://cdn.shopify.com/s/files/1/0664/2404/5740/files/cropped_signature.png?v=1729842291"/>
+    </div>
+    <p class="f4 lh150 fw600">{{ section.settings.name }}</p>
+    <p class="f6 lh150 fw400">{{ section.settings.position }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Visionary Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Upload Image"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Meet the Visionary"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Manisha Verma: The Creative Force Behind Marushika"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "With a passion for art and design, Manisha Verma founded Marushika to blend her love for traditional Indian artistry with modern fashion."
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "name",
+      "default": "Manisha Verma"
+    },
+    {
+      "type": "text",
+      "id": "position",
+      "label": "Position",
+      "default": "Founder & Creative Director"
+    }
+  ],
+  "presets": [
+    {
+    "name": "Visionary Section"
+    }
+  ]
+}
+{% endschema %}

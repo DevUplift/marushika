@@ -1,0 +1,254 @@
+{{ 'banner-with-text-box.css' | asset_url | stylesheet_tag }}
+
+
+<style>
+    .booking-section .text-box-content{
+      border:none;
+    }
+
+    /* General Layout */
+  .appointment-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    background-color: #f5f4eb;
+  }
+
+  .calendar-container {
+    width: 65%;
+  }
+
+  .location-container {
+    width: 30%;
+    text-align: center;
+  }
+
+  .calendar-header h2 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .calendar-body {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #date-picker {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.4rem;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #231921;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .time-slots {
+    width: 35%;
+  }
+
+  .time-slots h3 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .time-slots ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .time-slots li {
+    padding: 1rem;
+    border: 1px solid #ccc;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .time-slots li:hover,
+  .time-slots .selected-time {
+    background-color: #231921;
+    color: #fff;
+  }
+
+  .location-image img {
+    width: 100%;
+    height: auto;
+  }
+
+  .location-details {
+    margin-top: 1rem;
+  }
+
+  .location-details h3 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.6rem;
+  }
+
+  .location-details p {
+    font-size: 1.2rem;
+  }
+
+  .appointment-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: #f5f4eb;
+  }
+
+  .timezone {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .timezone select {
+    padding: 0.5rem;
+    font-size: 1.2rem;
+  }
+
+  .next-button {
+    padding: 1rem 2rem;
+    background-color: #61023b;
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .next-button:hover {
+    background-color: #333;
+  }
+</style>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<section class="booking-section">
+  <div class="banner-with-text-box">
+    <img src="{{ section.settings.image | img_url: 'master' }}" alt="Booking Image">
+  </div>
+  <div class="text-box-container">
+    <div class="text-box-container2">
+      <div class="text-box-content p48">
+        {% render 'triple-line-snippet',
+          triple_line_sub_title: section.settings.triple_line_sub_title,
+          triple_line_title: section.settings.triple_line_title,
+          triple_line_text: section.settings.triple_line_text
+        %}
+
+        <div class="appointment-section">
+          <div class="calendar-container">
+            <div class="calendar-header">
+              <h2>Select Date and Time</h2>
+            </div>
+            <div class="calendar-body">
+              <!-- Flatpickr calendar input -->
+              <div class="calendar">
+                <input id="date-picker" type="text" placeholder="Select a Date">
+              </div>
+              <div class="time-slots">
+                <h3 id="selected-date">Please select a date</h3>
+                <ul id="time-slots-list">
+                  <!-- Time slots will be dynamically populated -->
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="location-container">
+            <div class="location-image">
+              <img src="showroom.jpg" alt="Marushika Showroom">
+            </div>
+            <div class="location-details">
+              <h3>Marushika Showroom</h3>
+              <p>
+                Building 5, Unit A104, Dubai Design District,<br>
+                Dubai, United Arab Emirates
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="appointment-footer">
+          <div class="timezone">
+            <span>Time Zone</span>
+            <select>
+              <option value="Asia/Dubai">Asia/Dubai</option>
+              <!-- Add more time zones here -->
+            </select>
+          </div>
+          <button class="next-button">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", function() {
+  // Initialize Flatpickr calendar
+  const calendar = flatpickr("#date-picker", {
+    minDate: "today",
+    dateFormat: "Y-m-d",
+    inline: true,
+    onChange: function(selectedDates, dateStr, instance) {
+      // Display selected date
+      document.getElementById("selected-date").textContent = `Selected Date: ${dateStr}`;
+      
+      // Dynamically generate time slots
+      const timeSlots = ['11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM'];
+      let timeSlotsList = document.getElementById("time-slots-list");
+      timeSlotsList.innerHTML = ''; // Clear existing slots
+      
+      timeSlots.forEach(function(slot) {
+        let listItem = document.createElement("li");
+        listItem.textContent = slot;
+        listItem.addEventListener('click', function() {
+          // Remove selected class from all slots
+          document.querySelectorAll('#time-slots-list li').forEach(function(li) {
+            li.classList.remove('selected-time');
+          });
+          // Add selected class to the clicked slot
+          this.classList.add('selected-time');
+        });
+        timeSlotsList.appendChild(listItem);
+      });
+    }
+  });
+});
+</script>
+{% schema %}
+{
+  "name": "Section name",
+  "settings": [
+  {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+  },
+  {
+    "type": "text",
+    "id": "triple_line_sub_title",
+    "label": "Subtitle text"
+  },
+  {
+    "type": "text",
+    "id": "triple_line_title",
+    "label": "Title text"
+  },
+  {
+    "type": "text",
+    "id": "triple_line_text",
+    "label": "Text"
+  },
+  ],
+  "presets": [
+    {
+    "name": "Booking section"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,370 @@
+{{ 'banner-with-text-box.css' | asset_url | stylesheet_tag }}
+
+<style> 
+  .contact-section .text-box-container{
+    max-width: 110rem;
+    background-color: #FFFDF9;
+    margin-bottom: 10rem;
+  }
+  .contact-form-wrapper {
+    display: flex;
+    gap: 6.4rem;
+    justify-content: space-between;
+    margin-top:4.8rem;
+  }
+  .contact-form-left{
+    flex: 1.3;
+  }
+  .contact-form-right{
+    flex:0.7;
+  }
+
+  .contact-form-left, .contact-form-right {
+    text-align:start;
+  }
+
+  .contact-form-left {
+    max-width: 60%;
+  }
+
+  .contact-form-left input, .contact-form-left select, .contact-form-left textarea{
+    background-color:transparent;
+  }
+
+  .contact-form-right {
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+  }
+
+  .contact-form-right h3{
+    font-family: Gretha, sans-serif;
+    color: var(--primary-color);
+  }
+
+  .contact-form-left div {
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-form-left label {
+    display: block;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+  }
+
+  .contact-form-left input, .contact-form-left select, .contact-form-left textarea {
+    width: 100%;
+    padding: 1.6rem;
+    border: 0.5px solid var(--primary-color);
+    font-size: 1.4rem;
+  }
+  .contact-form-left textarea{
+    font-family: Raleway, sans-serif;
+  }
+
+  .email-phone{
+    display: flex;
+    width: 100%;
+    gap:1rem;
+    margin:0 !important;
+  }
+  .email-phone .email, .email-phone .phone{
+    flex:1;
+  }
+
+  .contact-form-left input[type="checkbox"] {
+    width: auto;
+    margin-right: 1rem;
+  }
+
+  .contact-form-left textarea {
+    height: 10rem;
+    resize: vertical;
+  }
+  input::placeholder,select, textarea::placeholder {
+    color:#837D81;
+  }
+
+  .contact-form-left .submit button{
+    padding: 1.6rem 2.4rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    gap: 1rem;
+    cursor: pointer;
+    background-color: var(--violet-color);
+    color: var(--secondary-color);
+    border: none;
+    font-family: var(--font-body-family);
+    width: auto;
+  }
+  .contact-form-left .submit .frame-child{
+    width: 2.4rem;
+    position: relative;
+    border-top: 1px solid;
+    height: 0.1rem;
+    display: block !important;
+    margin:0 !important;
+  }
+  div.submit{
+    margin-top:3.2rem;
+  }
+
+  .contact-form-right .contact-detail {
+    display: flex;
+    gap: 1.6rem;
+    flex-direction: column;
+  }
+
+  .contact-form-right .contact-detail i {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+  }
+
+  .contact-form-right .contact-detail p {
+    margin: 0;
+    font-size: 1.4rem;
+  }
+
+  .contact-form-right .social-icons {
+    display: flex;
+    gap: 1.2rem;
+    flex-direction: column;
+  }
+  .social-icons h3{
+    font-style: italic;
+  }
+  .contact-form-right .social-icons div{
+    display: flex;
+    gap: 2rem;
+  }
+
+  .contact-form-right .social-icons a {
+    font-size: 2.4rem;
+    color: var(--primary-color);
+  }
+
+  .checkbox-group {
+    display: flex;
+    align-items: center;
+  }
+
+  .checkbox-group label {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+
+   @media (max-width: 1024px) {
+    .contact-form-wrapper {
+      flex-direction: column;
+    }
+
+    .contact-form-left,
+    .contact-form-right {
+      max-width: 100%;
+      flex: 1;
+    }
+
+    .contact-form-left {
+      max-width: 100%;
+    }
+     .contact-detail,.social-icons{
+      text-align: -webkit-center;
+      align-items: center;
+     }
+     .contact-form-left .submit button{
+        width: 100%;
+        justify-content: center;
+     }
+  }
+
+  @media (max-width: 768px) {
+    .email-phone {
+      flex-direction: column;
+    }
+
+    .contact-form-left input,
+    .contact-form-left select,
+    .contact-form-left textarea {
+      font-size: 1.2rem;
+      padding: 1.2rem;
+    }
+
+    .contact-form-right .contact-detail p {
+      font-size: 1.2rem;
+    }
+
+    .contact-form-right .social-icons a {
+      font-size: 2rem;
+    }
+  }
+
+  @media (max-width: 530px) {
+    .contact-form-left input,
+    .contact-form-left select,
+    .contact-form-left textarea {
+      font-size: 1rem;
+      padding: 1rem;
+    }
+
+    .contact-form-right .contact-detail p {
+      font-size: 1rem;
+    }
+
+    .contact-form-right .social-icons a {
+      font-size: 1.8rem;
+    }
+
+    .contact-form-right h3 {
+      font-size: 1.6rem;
+    }
+  }
+</style>
+
+<section class="contact-section">
+  <div class="banner-with-text-box">
+    <img src="{{ section.settings.image | img_url: 'master' }}" alt="Booking Image">
+  </div>
+  <div class="text-box-container">
+    <div class="text-box-container2">
+      <div class="text-box-content p48">
+        {% render 'triple-line-snippet',
+          triple_line_sub_title: section.settings.triple_line_sub_title,
+          triple_line_title: section.settings.triple_line_title,
+          triple_line_text: section.settings.triple_line_text
+        %}
+        <div class="contact-form-wrapper mt48">
+          <div class="contact-form-left">
+            {% form 'contact' %}
+              {{ form.errors | default_errors }}
+
+              <div class="full-name">
+                <label for="full-name">Full Name</label>
+                <input type="text" name="contact[full_name]" placeholder="Enter" id="full-name">
+              </div>
+
+              <div class="email-phone">
+                <div class="email">
+                  <label for="email">Email Address</label>
+                  <input type="email" name="contact[email]" placeholder="Enter" id="email">
+                </div>
+                <div class="phone">
+                  <label for="phone">Mobile Number</label>
+                  <input type="tel" name="contact[phone]" placeholder="Enter" id="phone">
+                </div>
+              </div>
+
+              <div class="subject">
+                <label for="subject">Subject</label>
+                <select name="contact[subject]" id="subject">
+                  <option value="">Select</option>
+                  <option value="inquiry">Inquiry</option>
+                  <option value="feedback">Feedback</option>
+                </select>
+              </div>
+
+              <div class="message">
+                <label for="message">Your Message</label>
+                <textarea name="contact[body]" placeholder="Write here.." id="message"></textarea>
+              </div>
+
+              <div class="checkbox-group">
+                <input type="checkbox" name="contact[sms]" value="sms" id="sms">
+                <label for="sms">I would like to receive communication through SMS</label>
+              </div>
+              <div class="checkbox-group">
+                <input type="checkbox" name="contact[whatsapp]" value="whatsapp" id="whatsapp">
+                <label for="whatsapp">I would like to receive communication through WhatsApp</label>
+              </div>
+              <div class="checkbox-group">
+                <input type="checkbox" name="contact[email]" value="email" id="email_comms">
+                <label for="email">I would like to receive communication through Email</label>
+              </div>
+
+              <div class="submit">
+                <button type="submit" class="d-flex fw700 lh150 f5 align-center">
+                  <div class="frame-child" style="border-color:var(--secondary-color)"></div>
+                  SUBMIT
+                </button>
+              </div>
+            {% endform %}
+          </div>
+
+          <div class="contact-form-right">
+            <div class="contact-detail">
+              {{- 'icon-call.svg' | inline_asset_content -}}
+              <div>
+                <h3 class="f4 fw600 lh150">Contact us at</h3>
+                <p>+971 52 745 2161</p>
+              </div>
+            </div>
+
+            <div class="contact-detail">
+              {{- 'icon-mail.svg' | inline_asset_content -}}
+              <div>
+                <h3 class="f4 fw600 lh150">Email us at</h3>
+                <p>support@marushikaofficial.com</p>
+              </div>
+            </div>
+
+            <div class="contact-detail">
+              {{- 'icon-hours.svg' | inline_asset_content -}}
+              <div>
+                <h3 class="f4 fw600 lh150">Boutique Hours</h3>
+                <p>
+                  Monday – Saturday:<br>
+                  11:00 AM – 9:00 PM<br>
+                  Sunday Closed
+                </p>
+              </div>
+            </div>
+
+            <div class="social-icons">
+              <h3 class="f4 fw600 lh150">Follow us on</h3>
+              <div>
+                <a href="https://www.linkedin.com/company/marushikaofficial/">{{- 'linkedin.svg' | inline_asset_content -}}</a>
+                <a href="https://www.facebook.com/marushikaofficial">{{- 'facebook.svg' | inline_asset_content -}}</a>
+                <a href="https://instagram.com/marushikaofficial">{{- 'instagram.svg' | inline_asset_content -}}</a>
+                <a href="https://www.youtube.com/@marushikaofficial">{{- 'youtube.svg' | inline_asset_content -}}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact section",
+  "settings": [
+  {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+  },
+  {
+    "type": "text",
+    "id": "triple_line_sub_title",
+    "label": "Subtitle text"
+  },
+  {
+    "type": "text",
+    "id": "triple_line_title",
+    "label": "Title text"
+  },
+  {
+    "type": "text",
+    "id": "triple_line_text",
+    "label": "Text"
+  },
+  ],
+  "presets": [
+    {
+    "name": "Contact section"
+    }
+  ]
+}
+{% endschema %}

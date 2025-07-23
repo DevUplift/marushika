@@ -1,0 +1,90 @@
+<style>
+  .one-pic-section{
+    text-align: center;
+  }
+  .one-pic-section img{
+    max-width: 100%;
+    height: 70rem;
+    object-fit: cover;
+  }
+  .icons-one-pic{
+    text-align:center;
+    margin-top:6rem;
+    margin-bottom: 2rem;
+  }
+  @media (max-width: 768px) {
+    .icons-one-pic {
+      margin-top:4rem;
+    }
+    .one-pic-section img{
+      height: 50rem;
+    }
+  }
+</style>
+
+<section class="one-pic-section maxp">
+  <div class="mb48">
+    {% render 'triple-line-snippet',
+      triple_line_sub_title: section.settings.triple_line_sub_title,
+      triple_line_text: section.settings.triple_line_text,
+      triple_line_title: section.settings.triple_line_title
+    %}
+  </div>
+  <div>
+    <img width="100%" height="auto" src="{{ section.settings.image | img_url: 'master' }}" alt="">
+  </div>
+
+</section>
+{% comment %}
+  {% render 'book-experience-snippet' %}
+{% endcomment %}
+<div class="icons-one-pic">
+  <img width="33" src="https://cdn.shopify.com/s/files/1/0664/2404/5740/files/maru-logo.png?v=1728324567">
+  <img width="44" src="https://cdn.shopify.com/s/files/1/0664/2404/5740/files/maru-logo.png?v=1728324567">
+  <img width="33" src="https://cdn.shopify.com/s/files/1/0664/2404/5740/files/maru-logo.png?v=1728324567">
+</div>
+
+{% schema %}
+{
+  "name": "One pic section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "triple_line_sub_title",
+      "label": "Subtitle text"
+    },
+
+    {
+      "type": "text",
+      "id": "triple_line_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "triple_line_text",
+      "label": "Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Visit our Store"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+    "name": "One pic section"
+    }
+  ]
+}
+{% endschema %}

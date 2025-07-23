@@ -1,0 +1,162 @@
+<style>
+  .media-banner-section {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .media-banner-section:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, #0000004d 0% 100%);
+    z-index: 1;
+  }
+
+  .media-banner-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    align-items: end;
+    justify-content: left;
+    padding: 9.6rem 4.8rem;
+  }
+
+  @media (max-width: 768px) {
+    .media-banner-container {
+      padding: 5.6rem 0.8rem;
+    }
+  }
+
+  .media-banner-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  .media-banner-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+  }
+
+  .media-banner-title {
+    color: var(--secondary-color);
+    font-family: 'Gretha', sans-serif;
+  }
+
+  .media-banner-text {
+    color: var(--secondary-color-text);
+  }
+</style>
+
+<section class="media-banner-section">
+  <div class="media-banner-container d-flex">
+    
+    {% if section.settings.media_type == 'video' and section.settings.video_file.sources != blank %}
+      <video autoplay muted loop playsinline oncontextmenu="return false;" preload="auto" class="media-banner-background">
+        <source src="{{ section.settings.video_file.sources[1].url }}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    {% elsif section.settings.media_type == 'image' and section.settings.image_file != blank %}
+      <img src="{{ section.settings.image_file | img_url: 'master' }}" alt="Banner Image" class="media-banner-background" loading="lazy">
+    {% endif %}
+
+    <div class="media-banner-content scroll-trigger animate--slide-in">
+      <div class="sub-title-section d-inflex align-center f4 fw400 lh150 mb12" style="color:var(--secondary-color);">
+        <div class="sub-line-border" style="border-color:var(--secondary-color)"></div>
+        <p>{{ section.settings.banner_sub_title }}</p>
+      </div>
+      <h2 class="media-banner-title f1 fw700 mb12">{{ section.settings.banner_title }}</h2>
+      <p class="media-banner-text f4 fw400 mb48">{{ section.settings.banner_text }}</p>
+      {%
+        render 'custom-button',
+        button_link: section.settings.banner_button_link ,
+        button_text: section.settings.banner_button_text ,
+        button_bg_color: 'var(--secondary-color)',
+        button_text_color: 'var(--primary-color)',
+        line_color: 'var(--primary-color)',
+        border_color: 'var(--primary-color)',
+        show_second_frame_child: false
+      %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Media Banner",
+  "settings": [
+    {
+      "type": "select",
+      "id": "media_type",
+      "label": "Media Type",
+      "default": "video",
+      "options": [
+        {
+          "value": "video",
+          "label": "Video"
+        },
+        {
+          "value": "image",
+          "label": "Image"
+        }
+      ]
+    },
+    {
+      "type": "video",
+      "id": "video_file",
+      "label": "Upload Video",
+      "info": "Shown only if 'Video' is selected"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_file",
+      "label": "Upload Image",
+      "info": "Shown only if 'Image' is selected"
+    },
+    {
+      "type": "text",
+      "id": "banner_sub_title",
+      "label": "Banner Sub Title",
+      "default": "Luxury Redefined Through Art"
+    },
+    {
+      "type": "text",
+      "id": "banner_title",
+      "label": "Banner Title",
+      "default": "Marushika: Weaving Stories"
+    },
+    {
+      "type": "textarea",
+      "id": "banner_text",
+      "label": "Banner Text",
+      "default": "Our exclusive ready-to-wear collection is meticulously designed for the modern, confident woman who embodies strength and grace."
+    },
+    {
+      "type": "text",
+      "id": "banner_button_text",
+      "label": "Button Text",
+      "default": "Explore the Collection"
+    },
+    {
+      "type": "url",
+      "id": "banner_button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Media Banner"
+    }
+  ]
+}
+{% endschema %}

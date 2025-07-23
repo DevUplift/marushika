@@ -1,0 +1,42 @@
+{% layout none %}
+
+<script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=VwWUpX"></script>
+
+<style>
+    .klaviyo-close-form{
+      display:none !important;
+    }
+
+
+  /* .klaviyo-form {
+    position: relative !important;
+  }
+
+  .klaviyo-form::after {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background: linear-gradient(
+                0deg,
+                rgba(0,0,0,.50) 0%,
+                rgba(0,0,0,.50) 100%
+              ) !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+  } */
+  .klaviyo-form > div:first-child {
+    z-index:5;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(85px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    height: 100%;
+    align-self: center;
+    border-radius: 12px;
+    padding: 2rem !important;
+  }
+</style>
+
+<script>
+  window._klOnsite = window._klOnsite || [];
+  window._klOnsite.push(['openForm', 'XTF6id']);
+</script>

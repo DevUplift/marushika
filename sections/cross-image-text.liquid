@@ -1,0 +1,273 @@
+<!-- cross-image-text.liquid -->
+<style>
+  .cross-image-text-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: #fffdf9;
+    align-items: center;
+  }
+
+  .cross-image-text-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .cross-image-text-title {
+    color: var(--primary-color);
+    font-family: Gretha, sans-serif;
+    font-style: italic;
+  }
+
+  .cross-image-text-subtitle {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    color: var(--primary-color);
+    margin-bottom: 1.6rem;
+  }
+
+  .cross-image-text-blocks {
+    display: flex;
+    flex-direction: column;
+    gap: 6.4rem;
+    width: 40rem;
+    place-self: center;
+  }
+
+  .cross-image-text-block {
+    display: flex;
+    gap: 1.6rem;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cross-image-text-block-icon {
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .cross-image-text-block-text {
+    font-size: 1.6rem;
+    color: #231921;
+  }
+
+  .cross-image-text-image {
+    width: 100%;
+    object-fit: cover;
+    height: auto;
+    max-height: 50rem;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 1024px) {
+    .cross-image-text-section {
+      grid-template-columns: 1fr;
+    }
+
+    .cross-image-text-image {
+      width: 100%;
+      height: auto;
+    }
+
+    .cross-image-text-blocks {
+      width: 100%;
+      gap: 1rem;
+    }
+    .cross-image-text-content:first-child{
+      margin-top:1rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .cross-image-text-content:first-child{
+      margin-top:unset;
+    }
+    .cross-image-text-section {
+      grid-template-columns: 1fr;
+      gap: 1.6rem;
+    }
+
+    .cross-image-text-content {
+      padding: 1rem;
+    }
+
+    .cross-image-text-blocks {
+      gap: 3rem;
+    }
+
+    .cross-image-text-block-text {
+      font-size: 1.4rem;
+    }
+
+    .cross-image-text-title {
+      font-size: 2rem;
+    }
+
+    .cross-image-text-subtitle {
+      font-size: 1rem;
+    }
+  }
+</style>
+
+<section class="p48">
+  <div class="mb48">
+    {% render 'triple-line-snippet',
+      triple_line_sub_title: section.settings.subtitle,
+      triple_line_title: section.settings.title,
+      triple_line_text: section.settings.description
+    %}
+  </div>
+
+  <div class="cross-image-text-section">
+    <img class="cross-image-text-image" src="{{ section.settings.image | img_url: 'master' }}" alt="Main Image">
+    <div class="cross-image-text-content">
+      <div class="cross-image-text-blocks">
+        <div class="cross-image-text-block">
+          {{ section.settings['svg-code1'] }}
+          <div>
+            <h3 class="cross-image-text-title f3">{{ section.settings.title1 }}</h3>
+            <p class="cross-image-text-block-text f5">{{ section.settings.text1 }}</p>
+          </div>
+        </div>
+        <div class="cross-image-text-block">
+          {{ section.settings['svg-code2'] }}
+          <div>
+            <h3 class="cross-image-text-title f3">{{ section.settings.title2 }}</h3>
+            <p class="cross-image-text-block-text f5">{{ section.settings.text2 }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cross-image-text-section">
+    <div class="cross-image-text-content">
+      <div class="cross-image-text-blocks">
+        <div class="cross-image-text-block">
+          {{ section.settings['svg-code3'] }}
+          <div>
+            <h3 class="cross-image-text-title f3">{{ section.settings.title3 }}</h3>
+            <p class="cross-image-text-block-text f5">{{ section.settings.text3 }}</p>
+          </div>
+        </div>
+        <div class="cross-image-text-block">
+          {{ section.settings['svg-code4'] }}
+          <div>
+            <h3 class="cross-image-text-title f3">{{ section.settings.title4 }}</h3>
+            <p class="cross-image-text-block-text f5">{{ section.settings.text4 }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <img class="cross-image-text-image" src="{{ section.settings.image2 | img_url: 'master' }}" alt="Main Image">
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cross Image Text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Where Luxury Meets Personalization"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Discover the Heart of Marushika in Dubai"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Immerse yourself in the ultimate luxury shopping experience, where personalized service, curated collections, and refined hospitality await you in the heart of Dubai."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "First Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image2",
+      "label": "Second Image"
+    },
+    {
+      "type": "html",
+      "id": "svg-code1",
+      "label": "SVG icon code",
+      "info": "Learn more about adding your own SVG icons [here](https://support.safeasmilk.co/article/236-general-add-custom-svg-icons-to-your-theme)."
+    },
+    {
+      "type": "text",
+      "id": "title1",
+      "label": "Block Title"
+    },
+    {
+      "type": "textarea",
+      "id": "text1",
+      "label": "Block Text"
+    },
+    {
+      "type": "html",
+      "id": "svg-code2",
+      "label": "SVG icon code",
+      "info": "Learn more about adding your own SVG icons [here](https://support.safeasmilk.co/article/236-general-add-custom-svg-icons-to-your-theme)."
+    },
+    {
+      "type": "text",
+      "id": "title2",
+      "label": "Block Title"
+    },
+    {
+      "type": "textarea",
+      "id": "text2",
+      "label": "Block Text"
+    },
+    {
+      "type": "html",
+      "id": "svg-code3",
+      "label": "SVG icon code",
+      "info": "Learn more about adding your own SVG icons [here](https://support.safeasmilk.co/article/236-general-add-custom-svg-icons-to-your-theme)."
+    },
+    {
+      "type": "text",
+      "id": "title3",
+      "label": "Block Title"
+    },
+    {
+      "type": "textarea",
+      "id": "text3",
+      "label": "Block Text"
+    },
+    {
+      "type": "html",
+      "id": "svg-code4",
+      "label": "SVG icon code",
+      "info": "Learn more about adding your own SVG icons [here](https://support.safeasmilk.co/article/236-general-add-custom-svg-icons-to-your-theme)."
+    },
+    {
+      "type": "text",
+      "id": "title4",
+      "label": "Block Title"
+    },
+    {
+      "type": "textarea",
+      "id": "text4",
+      "label": "Block Text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cross Image Text"
+    }
+  ]
+}
+{% endschema %}

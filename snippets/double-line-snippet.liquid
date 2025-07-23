@@ -1,0 +1,41 @@
+<style>
+  .double-line-snippet{
+    gap: 1.2rem;
+    max-width: 85rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .double-line-snippet-title{
+    gap:0.8rem;
+    text-transform: uppercase;
+    color: var(--primary-color);
+  }
+  .sub-line,.sub-line-2{
+    width: 6.4rem;
+    position: relative;
+    border-top: 1px solid var(--primary-color);
+    height: 0.1rem;
+    display: block !important;
+  }
+  .double-line-snippet p{
+    font-family: 'Gretha', sans-serif;
+    color: var(--primary-color);
+  }
+</style>
+
+<div class="double-line-snippet mb32">
+  <div class="double-line-snippet-title d-inflex align-center fw400 lh150 mb12">
+    <div class="sub-line"></div>
+    <h1 class="f4">{{ double_line_sub_title }}</h1>
+    <div class="sub-line-2"></div>
+  </div>
+  {% if double_line_title %}
+  <h1 class="f2">{{ double_line_title }}</h1>
+  {% endif %}
+  <p class="fw600 f3 lh150">
+    {{ double_line_text }}
+  </p>
+</div>

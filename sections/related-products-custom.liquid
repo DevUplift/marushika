@@ -1,0 +1,172 @@
+<style>
+  .related-products-heading {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .related-products-triple-line {
+    max-width: 80rem;
+    text-align: start;
+  }
+
+  .related-products-triple-line .triple-line-snippet {
+    align-items: start;
+  }
+
+  /* Use CSS Grid for the related products grid */
+  .related-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2.4rem;
+  }
+
+  .related-product-item {
+    text-align: center;
+  }
+
+  .related-product-item a {
+    text-decoration: none;
+  }
+
+  .related-product-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .related-product-item h3 {
+    margin-top: 1.6rem;
+    text-transform: uppercase;
+  }
+
+  /* Adjust grid for mobile devices */
+  @media (max-width: 768px) {
+    .related-products-grid {
+      grid-template-columns: repeat(2, 1fr); /* 2 products per row on mobile */
+    }
+    .related-products-heading {
+        gap: 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .related-products-triple-line {
+        max-width: 100%;
+    }
+    .related-products-heading .custom-button{
+        align-self: flex-end;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .related-products-grid {
+      grid-template-columns: repeat(1, 1fr); /* 1 product per row on smaller screens */
+    }
+  }
+    @media (max-width: 1024px) {
+    .related-products-triple-line {
+        max-width: 40rem;
+    }
+  }
+</style>
+
+
+  {%- assign current_collection = collection | default: product.collections.first -%}
+<section class="p48">
+  <div class="related-products-heading mb48 d-flex scroll-trigger animate--slide-in p-mobile">
+    <div class="related-products-triple-line">
+      {% render 'triple-line-snippet',
+        triple_line_sub_title: section.settings.triple_line_sub_title,
+        triple_line_text: section.settings.triple_line_text,
+        triple_line_title: section.settings.triple_line_title
+      %}
+    </div>
+    {% render 'custom-button',
+      button_text: section.settings.button_text,
+      button_link: current_collection.url,
+      button_bg_color: 'var(--violet-color)',
+      button_text_color: 'var(--secondary-color)',
+      line_color: 'var(--secondary-color)',
+      border_color: 'var(--secondary-color)',
+      show_second_frame_child: false
+    %}
+  </div>
+
+  <div>
+
+  {%- if current_collection -%}
+    <div class="related-products-grid">
+      <!-- randomly shows 3 products -->
+      {%- assign product_count = 0 -%}
+      {%- assign total_products = current_collection.products | size -%}
+      {%- assign random_offset = "now" | date: "%N" | modulo: total_products -%}
+      
+      {%- for related_product in current_collection.products offset: random_offset -%}
+        {%- if related_product.id != product.id and product_count < 3 -%}
+          <div class="related-product-item">
+            <a href="{{ related_product.url }}">
+              <img src="{{ related_product.featured_image | img_url: 'master' }}" alt="{{ related_product.title }}">
+              <h3 class="f5 fw400 lh150">{{ related_product.title }}</h3>
+            </a>
+          </div>
+          {%- assign product_count = product_count | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+      <!-- to here -->
+    </div>
+  {%- endif -%}
+</div>
+
+  <!-- same 3 products -->
+  {% comment %}
+   {%- assign product_count = 0 -%} <!-- Initialize a product count -->
+      {%- assign shuffled_products = current_collection.products | shuffle -%}
+      {%- for related_product in shuffled_products -%}
+        {%- if related_product.id != product.id and product_count < 3 -%} <!-- Ensure the current product is excluded and limit to 3 products -->
+          <div class="related-product-item">
+            <a href="{{ related_product.url }}">
+              <img src="{{ related_product.featured_image | img_url: 'master' }}" alt="{{ related_product.title }}">
+              <h3 class="f5 fw400 lh150">{{ related_product.title }}</h3>
+            </a>
+          </div>
+          {%- assign product_count = product_count | plus: 1 -%} <!-- Increment product count -->
+        {%- endif -%}
+      {%- endfor -%}
+  {% endcomment %}
+
+</section>
+
+{% schema %}
+{
+  "name": "Related products custom",
+  "settings": [
+    {
+      "type": "text",
+      "id": "triple_line_sub_title",
+      "label": "Subtitle text"
+    },
+
+    {
+      "type": "text",
+      "id": "triple_line_title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "triple_line_text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "VIEW MORE FROM THE COLLECTION"
+    }
+  ],
+  "presets": [
+    {
+    "name": "Related products custom"
+    }
+  ]
+}
+{% endschema %}

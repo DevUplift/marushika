@@ -1,0 +1,17 @@
+<!-- banner-with-text-box.liquid -->
+{{ 'banner-with-text-box.css' | asset_url | stylesheet_tag }}
+
+<section class="banner-with-text-box">
+  <img src="{{ bg_image | img_url: 'master' }}" alt="Cover Image">
+</section>
+<div class="text-box-container">
+  <div class="text-box-container2">
+    <div class="text-box-content p48">
+      {% render 'triple-line-snippet',
+        triple_line_sub_title: triple_line_sub_title,
+        triple_line_title: triple_line_title,
+        triple_line_text: triple_line_text
+      %}
+    </div>
+  </div>
+</div>

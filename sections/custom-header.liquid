@@ -1,0 +1,796 @@
+<style>
+    /* Announcement Bar Styles */
+  .custom-announcement-bar {
+    width: 100%;
+    background-color: #FFFDF9 !important;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    z-index: 1001;
+    {% unless section.settings.show_announcement %}
+    display: none;
+    {% endunless %}
+  }
+  
+  .custom-announcement-bar__content {
+    display: inline-block;
+    white-space: nowrap;
+    padding: 1rem 0;
+    color: var(--primary-color);
+    font-weight: 700;
+    {% if section.settings.announcement_style == 'marquee' %}
+    animation: marquee {{ section.settings.speed | default: 20 }}s linear infinite;
+    {% endif %}
+  }
+
+    .custom-announcement-bar__content.static {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    white-space: normal;
+  }
+
+    
+  .custom-announcement-bar__message {
+    display: inline-block;
+    padding: 0 2rem;
+    position: relative;
+  }
+  
+  .custom-announcement-bar__message:not(:last-child):after {
+    content: "•";
+    position: absolute;
+    right: -0.5rem;
+  }
+  
+  .custom-announcement-bar__phone {
+    color: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  @keyframes marquee {
+    0% { 
+      transform: translateX(100vw); /* Start completely off-screen to the right */
+    }
+    100% { 
+      transform: translateX(-100%); /* End completely off-screen to the left */
+    }
+  }
+  
+  /* Adjust header position when announcement is shown */
+  {% if section.settings.show_announcement %}
+  .site-header {
+    top: 50px !important;
+  }
+  @media (max-width: 768px) {
+  .site-header {
+    top: 80px !important;
+    }
+    .custom-announcement-bar__message{
+      font-size:12px;
+    }
+  }
+    
+  {% endif %}
+  
+  .site-header {
+    width: 100%;
+    background-color: #F5F4EB;
+    z-index: 1000;
+    transition: background-color 0.3s ease, top 0.3s ease;
+    position: fixed;
+    top: 0px;
+  }
+
+  .transparent-header {
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+  }
+
+  .scrolled {
+    background-color: #FFFDF9 !important;
+    top: 0;
+    position: fixed !important;
+    border-bottom: 1px solid var(--primary-color);
+  }
+
+  .scrolled .header-inner {
+    padding: 1rem;
+  }
+
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    height: 100%;
+  }
+
+  .site-navigation ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+
+  .site-navigation a {
+    text-decoration: none;
+  }
+
+  .reserve-button {
+    padding: 1rem 2rem;
+    background-color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    border: 0.5px solid var(--Text-Primary, #231921);
+
+  }
+
+  .site-header nav a {
+    color: var(--primary-color);
+    {% if collection.handle == 'all' or template.name == 'product' or request.path == '/cart' or request.path == '/policies/privacy-policy' or request.path == '/policies/terms-of-service' or request.path == '/policies/shipping-policy' %}
+    color: var(--primary-color) !important;
+    {% endif %}
+  }
+
+  .transparent-header a {
+    color: #fff!important;
+  }
+
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color);
+    z-index: 999;
+    padding-top: 7rem;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: visibility 0.3s, opacity 0.3s, transform 0.3s ease;
+  }
+
+  .mobile-menu.open {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .mobile-menu ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .mobile-menu a {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    color: var(--secondary-color);
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .hamburger {
+    display: none;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: var(--primary-color);
+    margin: 5px 0;
+    transition: all 0.4s ease;
+    border: 0.5px solid #d2ab47;
+  }
+
+  .hamburger.open span {
+    background-color: var(--secondary-color);
+  }
+
+  .hamburger.open span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.open span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  @media (max-width: 768px) {
+    .hamburger {
+      display: block;
+    }
+
+    .site-navigation {
+      display: none;
+    }
+  }
+
+  .scrolled .header-inner {
+    padding: 1rem !important;
+  }
+
+  @media (max-width: 530px) {
+    .reserve-button {
+      display: none;
+    }
+  }
+
+  .collections-section {
+    background-color: #F9F3E7 !important;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out, visibility 0.4s ease-in-out;
+    z-index: 999;
+  }
+
+  .collections-section.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    position: absolute;
+  }
+
+  .collections-container-header {
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .collection-item-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    text-decoration: none; /* Ensures no underline */
+  }
+
+  .collection-item-header img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+
+  .collection-content-header h3 {
+    text-transform: uppercase;
+    color: var(--primary-color);
+  }
+
+  .collection-content-header p {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+  }
+
+  .view-all {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 0.5px solid var(--primary-color);
+    padding: 2.4rem 0;
+  }
+
+  .view-all-button {
+    padding: 0.8rem 2rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    font-weight: 600;
+  }
+
+  .mobile-collections, .mobile-collections-category {
+    display: none;
+    list-style: none;
+    padding-left: 2rem;
+  }
+
+  .mobile-collections.open, .mobile-collections-category.open {
+    display: block;
+  }
+
+  .mobile-menu a.collapsible, .mobile-menu a.collapsible-category {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .mobile-menu a.collapsible:after, .mobile-menu a.collapsible-category:after {
+    content: '+';
+    font-size: 2.2rem;
+    line-height: 100%;
+  }
+
+  .mobile-menu a.collapsible.open:after, .mobile-menu a.collapsible-category.open:after {
+    content: '-';
+    font-size: 2.2rem;
+    line-height: 100%;
+  }
+
+  .dropdown-menu {
+    background-color: #F9F3E7;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out, visibility 0.4s ease-in-out;
+    z-index: 999;
+    list-style: none;
+    padding: 1rem;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  }
+  
+  .dropdown-menu li {
+    margin: 0.5rem 0;
+  }
+  
+  .dropdown-menu li a {
+    color: var(--primary-color) !important;
+    text-decoration: none;
+  }
+  
+  .dropdown-category:hover .dropdown-menu,
+  .dropdown-category.show .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+
+</style>
+
+
+{% if section.settings.show_announcement %}
+<div class="custom-announcement-bar">
+  <div class="custom-announcement-bar__content {% if section.settings.announcement_style == 'static' %}static{% endif %}">
+    {% for block in section.blocks %}
+      <div class="custom-announcement-bar__message">
+        {{ block.settings.message | replace: '+971 52 745 2161', '<span class="custom-announcement-bar__phone">+971 52 745 2161</span>' }}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+<header class="site-header transparent-header">
+  <div class="header-inner">
+    <div class="hamburger" id="hamburgerIcon" onclick="toggleMobileMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <nav class="site-navigation">
+      <ul>
+        {% for link in linklists[section.settings.menu].links %}
+          <li>
+            <a class="fw700 f5 lh150" href="{{ link.url }}">{{ link.title }}</a>
+          </li>
+        {% endfor %}
+        <li>
+          <a id="shopCollectionTab" class="fw700 f5 lh150" href="#">COLLECTIONS</a>
+        </li>
+        <li class="dropdown-category">
+          <a id="categoryTab" class="fw700 f5 lh150" href="#">CATEGORIES</a>
+          <ul class="dropdown-menu" id="categoryDropdown">
+            <li><a class="f5 fw700 lh150" href="/collections/all?filter.p.m.custom.category_custom=CO-ORD+SETS">CO-ORD SETS</a></li>
+            <li><a class="f5 fw700 lh150" href="/collections/all?filter.p.m.custom.category_custom=DRESSES">DRESSES</a></li>
+            <li><a class="f5 fw700 lh150" href="/collections/all?filter.p.m.custom.category_custom=JACKETS">JACKETS</a></li>
+            <li><a class="f5 fw700 lh150" href="/collections/all?filter.p.m.custom.category_custom=JUMPSUITS">JUMPSUITS</a></li>
+            <li><a class="f5 fw700 lh150" href="/collections/all?filter.p.m.custom.category_custom=KAFTANS">KAFTANS</a></li>
+            <li><a class="f5 fw700 lh150" href="/collections/all?filter.p.m.custom.category_custom=TOPS">TOPS</a></li>
+            <li><a class="f5 fw700 lh150" href="/collections/all?filter.p.m.custom.category_custom=SCARF">SCARVES</a></li>
+          </ul>
+        </li>
+        <li>
+          <a class="fw700 f5 lh150" href="/collections/on-sale">SPECIAL PRICES</a>
+        </li>
+      <script>
+        const categoryTab = document.getElementById("categoryTab");
+        const categoryWrapper = document.querySelector(".dropdown-category");
+      
+        categoryTab.addEventListener("click", function (e) {
+          e.preventDefault();
+          categoryWrapper.classList.toggle("show");
+        });
+      
+        // Close on outside click
+        document.addEventListener("click", function (e) {
+          if (!categoryWrapper.contains(e.target)) {
+            categoryWrapper.classList.remove("show");
+          }
+        });
+      </script>
+
+      </ul>
+    </nav>
+
+    <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
+      {%- if settings.logo != blank -%}
+        <div class="header__heading-logo-wrapper">
+          {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+          {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
+          {% capture sizes %}(min-width: 750px) {{ settings.logo_width }}px, 50vw{% endcapture %}
+          {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
+          {{
+            settings.logo
+            | image_url: width: 600
+            | image_tag:
+              class: 'header__heading-logo',
+              widths: widths,
+              height: logo_height,
+              width: settings.logo_width,
+              alt: logo_alt,
+              sizes: sizes,
+              preload: true
+          }}
+        </div>
+      {%- else -%}
+        <span class="h2">{{ shop.name }}</span>
+      {%- endif -%}
+    </a>
+
+    <div class="d-flex align-center" style="gap:3.2rem">
+      <nav class="site-navigation">
+        <ul style="padding:0;">
+          {% comment %}
+          {% for link in linklists[section.settings['sec-menu']].links %}
+            <li>
+              <a class="fw700 f5 lh150" href="{{ link.url }}">{{ link.title }}</a>
+            </li>
+          {% endfor %}{% endcomment %}
+          <li>
+              <a class="fw700 f5 lh150" href="https://booking.marushikaofficial.com/">VISIT OUR SHOWROOM</a>
+            </li>
+        </ul>
+      </nav>
+      <!-- <a href="https://booking.marushikaofficial.com/" class="reserve-button" style="color: var(--primary-color) !important;" target="_blank">Visit Our Showroom</a> -->
+
+      <div style="display:flex;">
+        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
+          class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}"
+        >
+          {%- if section.settings.enable_customer_avatar -%}
+            <account-icon>
+              {%- if customer and customer.has_avatar? -%}
+                {{ customer | avatar }}
+              {%- else -%}
+                <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
+              {%- endif -%}
+            </account-icon>
+          {%- else -%}
+            <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
+          {%- endif -%}
+          <span class="visually-hidden">
+            {%- liquid
+              if customer
+                echo 'customer.account_fallback' | t
+              else
+                echo 'customer.log_in' | t
+              endif
+            -%}
+          </span>
+        </a>
+
+        <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
+          {% if cart == empty %}
+            <span class="svg-wrapper">{{ 'icon-cart-empty.svg' | inline_asset_content }}</span>
+          {% else %}
+            <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
+          {% endif %}
+          <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+          {%- if cart != empty -%}
+            <div class="cart-count-bubble">
+              {%- if cart.item_count < 100 -%}
+                <span aria-hidden="true">{{ cart.item_count }}</span>
+              {%- endif -%}
+              <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+            </div>
+          {%- endif -%}
+        </a>
+      </div> 
+    </div>
+  </div>
+
+  <!-- Collections Section -->
+  <section id="collectionsSection" class="collections-section">
+    <div class="collections-container-header">
+      {% comment %}
+      {% for collection in collections %}
+        <a href="{{ collection.url }}" class="collection-item-header">
+          <img src="{{ collection.image | img_url: 'medium' }}" alt="{{ collection.title }}">
+          <div class="collection-content-header">
+            <h3 class="f5 fw700 lh150">{{ collection.title }}</h3>
+            <p>{{ collection.description | strip_html | truncate: 150 }}</p>
+          </div>
+        </a>
+      {% endfor %}{% endcomment %}
+
+      {% assign menu_handle = 'collections-newest-first' %}
+      {% for link in linklists[menu_handle].links %}
+        {% assign collection = link.object %}
+        <a href="{{ collection.url }}" class="collection-item-header">
+          <img src="{{ collection.image | img_url: 'medium' }}" alt="{{ collection.title }}">
+          <div class="collection-content-header">
+            <h3 class="f5 fw700 lh150">{{ collection.title }}</h3>
+            <p>{{ collection.description | strip_html | truncate: 150 }}</p>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+
+    <div class="view-all">
+      <div class="frame-child" style="border-color: var(--primary-color);"></div>
+      <a href="/collections/all" style="color: var(--primary-color) !important;" class="view-all-button"
+        >VIEW ALL COLLECTIONS</a
+      >
+      <div class="frame-child" style="border-color: var(--primary-color);"></div>
+    </div>
+  </section>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      {% for link in linklists[section.settings.menu].links %}
+        <li>
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        </li>
+      {% endfor %}
+      {% for link in linklists[section.settings['sec-menu']].links %}
+        <li>
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        </li>
+      {% endfor %}
+
+      <!-- COLLECTIONS collapsible link -->
+      <li>
+        <a href="#" class="collapsible">COLLECTIONS</a>
+        <ul class="mobile-collections">
+          {% for collection in collections %}
+            <li>
+              <a href="{{ collection.url }}">{{ collection.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+      <li>
+        <a href="#" class="collapsible-category">CATEGORIES</a>
+        <ul class="mobile-collections-category">
+            <li><a class="f5 fw700 lh150" href="/collections/all?filter.p.m.custom.category_custom=CO-ORD+SETS">CO-ORD SETS</a></li>
+            <li><a class="f5 fw700 lh150" href="/collections/all?filter.p.m.custom.category_custom=DRESSES">DRESSES</a></li>
+            <li><a class="f5 fw700 lh150" href="/collections/all?filter.p.m.custom.category_custom=JACKETS">JACKETS</a></li>
+            <li><a class="f5 fw700 lh150" href="/collections/all?filter.p.m.custom.category_custom=JUMPSUITS">JUMPSUITS</a></li>
+            <li><a class="f5 fw700 lh150" href="/collections/all?filter.p.m.custom.category_custom=KAFTANS">KAFTANS</a></li>
+            <li><a class="f5 fw700 lh150" href="/collections/all?filter.p.m.custom.category_custom=TOPS">TOPS</a></li>
+            <li><a class="f5 fw700 lh150" href="/collections/all?filter.p.m.custom.category_custom=SCARF">SCARVES</a></li>
+        </ul>
+      </li>
+      <li>
+          <a class="fw700 f5 lh150" href="/collections/on-sale">SPECIAL PRICES</a>
+      </li>
+      <li style="background-color: #FFF;">
+        <a style="color: var(--primary-color) !important;" href="https://booking.marushikaofficial.com/">RESERVE AN EXPERIENCE</a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var header = document.querySelector('.site-header');
+
+    // Function to add/remove scrolled class based on scroll position
+    function checkScrollPosition() {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+        header.classList.remove('transparent-header');
+      } else {
+        header.classList.remove('scrolled');
+        header.classList.add('transparent-header');
+      }
+    }
+
+    // Check the scroll position on page load
+    checkScrollPosition();
+
+    // Add the scroll event listener
+    window.onscroll = function() {
+      checkScrollPosition();
+    };
+
+    var collectionsSection = document.getElementById('collectionsSection');
+    var shopCollectionTab = document.getElementById('shopCollectionTab');
+    
+    var collapsibleLink = document.querySelector('.mobile-menu a.collapsible');
+    var mobileCollections = document.querySelector('.mobile-collections');
+    
+    var collapsibleLinkCategory = document.querySelector('.mobile-menu a.collapsible-category');
+    var mobileCollectionsCategory = document.querySelector('.mobile-collections-category');
+
+    // Show collections section on desktop
+    shopCollectionTab.addEventListener('mouseenter', function() {
+      collectionsSection.classList.add('show');
+    });
+
+    shopCollectionTab.addEventListener('click', function() {
+      collectionsSection.classList.add('show');
+    });
+
+    shopCollectionTab.addEventListener('mouseleave', function() {
+      collectionsSection.classList.remove('show');
+    });
+
+    collectionsSection.addEventListener('mouseenter', function() {
+      collectionsSection.classList.add('show');
+    });
+
+    collectionsSection.addEventListener('mouseleave', function() {
+      collectionsSection.classList.remove('show');
+    });
+
+    // Handle collapsible mobile menu for collections
+    collapsibleLink.addEventListener('click', function(event) {
+      event.preventDefault();
+      if (mobileCollections.classList.contains('open')) {
+        mobileCollections.classList.remove('open');
+        collapsibleLink.classList.remove('open');
+      } else {
+        mobileCollections.classList.add('open');
+        collapsibleLink.classList.add('open');
+      }
+    });
+
+    collapsibleLinkCategory.addEventListener('click', function(event) {
+      event.preventDefault();
+      if (mobileCollectionsCategory.classList.contains('open')) {
+        mobileCollectionsCategory.classList.remove('open');
+        collapsibleLinkCategory.classList.remove('open');
+      } else {
+        mobileCollectionsCategory.classList.add('open');
+        collapsibleLinkCategory.classList.add('open');
+      }
+    });
+
+      {% if section.settings.show_announcement %}
+    var header = document.querySelector('.site-header');
+    function checkScrollPosition() {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+        header.classList.remove('transparent-header');
+        header.style.top = '0'; // Keep at top when scrolled
+      } else {
+        header.classList.remove('scrolled');
+        header.classList.add('transparent-header');
+        header.style.top = '40px'; // Account for announcement bar
+      }
+    }
+    {% endif %}
+    document.querySelectorAll('.custom-announcement-bar__phone').forEach(phone => {
+      phone.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Remove all spaces from the phone number for the WhatsApp link
+        const phoneNumber = this.textContent.replace(/\s+/g, '');
+        window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=Hello`, '_blank');
+      });
+      
+      // Add hover styles for better UX
+      phone.style.cursor = 'pointer';
+      phone.style.textDecoration = 'underline';
+    });
+  });
+
+  function toggleMobileMenu() {
+    var menu = document.getElementById('mobileMenu');
+    var hamburger = document.getElementById('hamburgerIcon');
+
+    if (menu.classList.contains('open')) {
+      menu.classList.remove('open');
+      hamburger.classList.remove('open');
+    } else {
+      menu.classList.add('open');
+      hamburger.classList.add('open');
+    }
+  }
+</script>
+{% schema %}
+{
+  "name": "Custom header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Announcement Bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement bar",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "announcement_style",
+      "label": "Announcement Style",
+      "options": [
+        {
+          "value": "marquee",
+          "label": "Moving (Marquee)"
+        },
+        {
+          "value": "static",
+          "label": "Static (Stagnant)"
+        }
+      ],
+      "default": "marquee"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 5,
+      "max": 60,
+      "step": 1,
+      "unit": "s",
+      "label": "Animation speed (marquee only)",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Navigation Menus"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "Initial Menu"
+    },
+    {
+      "type": "link_list",
+      "id": "sec-menu",
+      "label": "Secondary Menu"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Announcement Message",
+      "settings": [
+        {
+          "type": "text",
+          "id": "message",
+          "label": "Message",
+          "default": "Free shipping is available for orders above 5000 AED in UAE. For international shipping WhatsApp us at +97152 745 2161"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom header",
+      "blocks": [
+        {
+          "type": "announcement",
+          "settings": {
+            "message": "Free shipping is available for orders above 5000 AED in UAE. For international shipping WhatsApp us at +97152 745 2161"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,42 @@
+{{ 'banner-with-text-box.css' | asset_url | stylesheet_tag }}
+{% render 'banner-with-text-box',
+  bg_image: section.settings.image,
+  triple_line_sub_title: section.settings.triple_line_sub_title,
+  triple_line_title: section.settings.triple_line_title,
+  triple_line_text: section.settings.triple_line_text
+%}
+
+{% schema %}
+{
+  "name": "Banner custom",
+  "settings": [
+    {
+      "type": "text",
+      "id": "triple_line_sub_title",
+      "label": "Subtitle text"
+    },
+    
+    {
+      "type": "text",
+      "id": "triple_line_title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "triple_line_text",
+      "label": "Text"
+    },  
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ],
+  "presets": [
+    {
+    "name": "Banner custom"
+    }
+  ]
+}
+{% endschema %}
+

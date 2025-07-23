@@ -1,0 +1,100 @@
+<!-- book-experience-snippet.liquid -->
+
+<style>
+  .book-experience-section {
+    background-size: cover;
+    background-position: center;
+    padding: 4.5rem 2rem;
+    text-align: center;
+    border: 1px solid #eee;
+    position: relative;
+    width:100%;
+    margin: 1rem 0;
+  }
+
+  .book-experience-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px;
+  }
+  .book-experience-content .triple-line-snippet{
+    margin-bottom:4rem;
+  }
+
+  .book-experience-subtitle {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 10px;
+  }
+
+  .book-experience-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    color: var(--primary-color);
+  }
+
+  .book-experience-description {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 30px;
+  }
+  .book-arrow-1{
+    top: 0;
+  }
+  .book-arrow-2{
+    bottom: 0;
+  }
+  .book-arrow-1, .book-arrow-2{
+    position: absolute;
+    left: 3rem;
+    right: 3rem;
+    width: -webkit-fill-available;
+  }
+  .book-arrow-3{
+    right: 0;
+  }
+  .book-arrow-4{
+    left: 0;
+  }
+  .book-arrow-3, .book-arrow-4{
+    position: absolute;
+    top: 3rem;
+    bottom: 3rem;
+    height:-webkit-fill-available;
+  }
+    @media (max-width: 768px) {
+      .book-experience-content{
+        padding: 0px;
+      }
+    }
+</style>
+
+<section class="book-experience-section" style="background-image: url('{{ 'book_bg-min.png' | asset_url }}');">
+  {% comment %}
+  <img class="book-arrow-1" src="{{ 'right-arrows.png' | asset_url }}">;
+  <img class="book-arrow-2" src="{{ 'right-arrows.png' | asset_url }}">;
+  <img class="book-arrow-3" src="{{ 'top-arrows.png' | asset_url }}">;
+  <img class="book-arrow-4" src="{{ 'top-arrows.png' | asset_url }}">;
+{% endcomment %}
+  <div class="book-experience-content">
+    {% render 'triple-line-snippet',
+      triple_line_sub_title: 'Appointment',
+      triple_line_title: 'Reserve an Experience',
+      triple_line_text: 'Step into the world of Marushika with a bespoke styling session at our Dubai showroom or enjoy a personalized virtual consultation from the comfort of your home.'
+    %}
+
+    <!-- Custom Button -->
+    {% render 'custom-button',
+      button_text: 'Book Now',
+      button_link: 'https://booking.marushikaofficial.com/',
+      button_bg_color: 'var(--violet-color)',
+      button_text_color: 'var(--secondary-color)',
+      line_color: 'var(--secondary-color)',
+      border_color: 'var(--secondary-color)',
+      show_second_frame_child: true
+    %}
+  </div>
+</section>
