@@ -466,7 +466,7 @@
 
       <div style="display:flex;">
         <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
-          class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %} {% if template != 'collection' and request.path != '/pages/about-us' %}color_hide{% endif %}"
+          class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %} {% if template != 'collection' and request.path != '/pages/about-us' and request.path != '/' %}color_hide{% endif %}"
         >
           {%- if section.settings.enable_customer_avatar -%}
             <account-icon>
