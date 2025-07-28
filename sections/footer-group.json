@@ -1,1 +1,100 @@
-{"name":"t:sections.footer.name","type":"footer","sections":{"custom_footer_AAJ3Fq":{"type":"custom-footer","blocks":{"block_YQM6c8":{"type":"block","settings":{"social_svg":"<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\">\n  <g clip-path=\"url(#clip0_215_895)\">\n    <path d=\"M23.0019 21.5839H23.2289L22.7939 20.9259C23.0599 20.9259 23.2009 20.7569 23.2029 20.5499C23.2029 20.5419 23.2029 20.5329 23.2019 20.5249C23.2019 20.2429 23.0319 20.1079 22.6829 20.1079H22.1189V21.5839H22.3309V20.9409H22.5919L23.0019 21.5839ZM22.5769 20.7739H22.3309V20.2749H22.6429C22.8039 20.2749 22.9879 20.3009 22.9879 20.5119C22.9879 20.7539 22.8029 20.7739 22.5769 20.7739Z\" fill=\"#231921\"><\/path>\n    <path d=\"M17.291 19.0729H14.284V14.3639C14.284 13.2409 14.264 11.7959 12.72 11.7959C11.154 11.7959 10.914 13.0189 10.914 14.2829V19.0729H7.908V9.38888H10.795V10.7119H10.835C11.424 9.70587 12.518 9.10487 13.683 9.14787C16.731 9.14787 17.292 11.1529 17.292 13.7599L17.291 19.0729ZM4.515 8.06487C3.551 8.06487 2.77 7.28388 2.77 6.31988C2.77 5.35588 3.551 4.57487 4.515 4.57487C5.479 4.57487 6.26 5.35588 6.26 6.31988C6.26 7.28388 5.479 8.06487 4.515 8.06487ZM6.018 19.0729H3.008V9.38888H6.018V19.0729ZM18.79 1.78287H1.497C0.68 1.77387 0.01 2.42887 0 3.24587V20.6099C0.01 21.4279 0.68 22.0829 1.497 22.0739H18.79C19.609 22.0839 20.282 21.4289 20.293 20.6099V3.24487C20.281 2.42587 19.608 1.77087 18.79 1.78187\" fill=\"#231921\"><\/path>\n    <path d=\"M22.603 19.4507C21.839 19.4577 21.225 20.0837 21.233 20.8477C21.24 21.6117 21.866 22.2257 22.63 22.2177C23.394 22.2107 24.008 21.5847 24 20.8207C23.993 20.0667 23.383 19.4577 22.63 19.4507H22.603ZM22.635 22.0587C21.965 22.0697 21.381 21.5367 21.37 20.8667C21.359 20.1967 21.893 19.6447 22.563 19.6337C23.233 19.6227 23.785 20.1567 23.796 20.8267C23.796 20.8337 23.796 20.8397 23.796 20.8467C23.81 21.5017 23.29 22.0447 22.635 22.0587H22.604H22.635Z\" fill=\"#231921\"><\/path>\n  <\/g>\n  <defs>\n    <clippath id=\"clip0_215_895\">\n      <rect width=\"24\" height=\"24\" fill=\"white\"><\/rect>\n    <\/clippath>\n  <\/defs>\n<\/svg>","social_link":"https:\/\/www.linkedin.com\/company\/marushikaofficial","social_alt_text":"linkedin"}},"block_FzypQU":{"type":"block","settings":{"social_svg":"<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\">\n  <g clip-path=\"url(#clip0_215_905)\">\n    <path d=\"M24 12.0723C24 18.0613 19.606 23.0263 13.87 23.9273V15.5643H16.659L17.19 12.1043H13.87V9.85927C13.87 8.91227 14.334 7.99027 15.82 7.99027H17.329V5.04427C17.329 5.04427 15.959 4.81027 14.65 4.81027C11.916 4.81027 10.13 6.46727 10.13 9.46627V12.1033H7.091V15.5633H10.13V23.9263C4.395 23.0243 0 18.0603 0 12.0723C0 5.44527 5.373 0.0722656 12 0.0722656C18.627 0.0722656 24 5.44427 24 12.0723Z\" fill=\"#231921\"><\/path>\n  <\/g>\n  <defs>\n    <clippath id=\"clip0_215_905\">\n      <rect width=\"24\" height=\"24\" fill=\"white\"><\/rect>\n    <\/clippath>\n  <\/defs>\n<\/svg>","social_link":"https:\/\/facebook.com\/marushikaofficial","social_alt_text":"Facebook"}},"block_8aUJrF":{"type":"block","settings":{"social_svg":"<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\">\n  <g clip-path=\"url(#clip0_215_908)\">\n    <path d=\"M12 2.162C15.204 2.162 15.584 2.174 16.849 2.232C18.157 2.292 19.504 2.59 20.457 3.543C21.419 4.505 21.708 5.839 21.768 7.151C21.826 8.416 21.838 8.796 21.838 12C21.838 15.204 21.826 15.584 21.768 16.849C21.709 18.15 21.404 19.51 20.457 20.457C19.495 21.419 18.162 21.708 16.849 21.768C15.584 21.826 15.204 21.838 12 21.838C8.796 21.838 8.416 21.826 7.151 21.768C5.86 21.709 4.482 21.397 3.543 20.457C2.586 19.5 2.292 18.153 2.232 16.849C2.174 15.584 2.162 15.204 2.162 12C2.162 8.796 2.174 8.416 2.232 7.151C2.291 5.855 2.599 4.487 3.543 3.543C4.503 2.583 5.842 2.292 7.151 2.232C8.416 2.174 8.796 2.162 12 2.162ZM12 0C8.741 0 8.332 0.014 7.052 0.072C5.197 0.157 3.355 0.673 2.014 2.014C0.668 3.36 0.157 5.198 0.072 7.052C0.014 8.332 0 8.741 0 12C0 15.259 0.014 15.668 0.072 16.948C0.157 18.801 0.675 20.648 2.014 21.986C3.359 23.331 5.2 23.843 7.052 23.928C8.332 23.986 8.741 24 12 24C15.259 24 15.668 23.986 16.948 23.928C18.802 23.843 20.646 23.326 21.986 21.986C23.333 20.639 23.843 18.802 23.928 16.948C23.986 15.668 24 15.259 24 12C24 8.741 23.986 8.332 23.928 7.052C23.843 5.197 23.326 3.354 21.986 2.014C20.643 0.671 18.797 0.156 16.948 0.072C15.668 0.014 15.259 0 12 0Z\" fill=\"#231921\"><\/path>\n    <path d=\"M11.9999 5.83789C8.59689 5.83789 5.83789 8.59689 5.83789 11.9999C5.83789 15.4029 8.59689 18.1619 11.9999 18.1619C15.4029 18.1619 18.1619 15.4029 18.1619 11.9999C18.1619 8.59689 15.4029 5.83789 11.9999 5.83789ZM11.9999 15.9999C9.79089 15.9999 7.99989 14.2089 7.99989 11.9999C7.99989 9.79089 9.79089 7.99989 11.9999 7.99989C14.2089 7.99989 15.9999 9.79089 15.9999 11.9999C15.9999 14.2089 14.2089 15.9999 11.9999 15.9999Z\" fill=\"#231921\"><\/path>\n    <path d=\"M18.4048 7.0343C19.2001 7.0343 19.8448 6.38959 19.8448 5.5943C19.8448 4.79901 19.2001 4.1543 18.4048 4.1543C17.6096 4.1543 16.9648 4.79901 16.9648 5.5943C16.9648 6.38959 17.6096 7.0343 18.4048 7.0343Z\" fill=\"#231921\"><\/path>\n  <\/g>\n  <defs>\n    <clippath id=\"clip0_215_908\">\n      <rect width=\"24\" height=\"24\" fill=\"white\"><\/rect>\n    <\/clippath>\n  <\/defs>\n<\/svg>","social_link":"https:\/\/instagram.com\/marushikaofficial","social_alt_text":"Instagram"}},"block_qF9HK8":{"type":"block","settings":{"social_svg":"<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\">\n  <path d=\"M23.498 6.18687C23.222 5.14787 22.409 4.32888 21.376 4.05088C19.505 3.54688 12 3.54688 12 3.54688C12 3.54688 4.495 3.54688 2.623 4.05088C1.591 4.32888 0.778 5.14687 0.502 6.18687C0 8.07087 0 12.0009 0 12.0009C0 12.0009 0 15.9309 0.502 17.8149C0.778 18.8539 1.591 19.6729 2.624 19.9509C4.495 20.4549 12 20.4549 12 20.4549C12 20.4549 19.505 20.4549 21.377 19.9509C22.409 19.6729 23.222 18.8549 23.499 17.8149C24 15.9309 24 12.0009 24 12.0009C24 12.0009 24 8.07087 23.498 6.18687ZM9.546 15.5699V8.43187L15.818 12.0009L9.546 15.5699Z\" fill=\"#231921\"><\/path>\n<\/svg>","social_link":"https:\/\/www.youtube.com\/@marushikaofficial","social_alt_text":"Youtube"}}},"block_order":["block_YQM6c8","block_FzypQU","block_8aUJrF","block_qF9HK8"],"settings":{"logo":"shopify:\/\/shop_images\/footer-logo.png","description":"Indulge in the essence of luxury. Stay updated for exclusive access to all things Marushika.","email_placeholder":"Enter email","submit_button_text":"Submit","column1_title":"Marushika’s Fusion of Art and Fashion","column1_text":"Marushika is a brand that emerges from the confluence of art and fashion, dedicated to creating wearable art that transcends both place and time.","column2_title":"Our Gallery","phone":"+971 52 745 2161","email":"support@marushikaofficial.com","location":"Location","boutique":"https:\/\/maps.app.goo.gl\/zktgN1rkhCdow2yK6","location_desc":"A104, Building 5, Dubai Design District","boutique_desc_link":"https:\/\/maps.app.goo.gl\/zktgN1rkhCdow2yK6","column3_title":"Marushika","column3_menu":"footer","column4_title":"Terms and Conditions","column4_menu":"terms-and-conditions","copyright_text":"2024 © Marushika Fashion L.L.C, All rights reserved."}},"footer":{"type":"footer","disabled":true,"settings":{"color_scheme":"scheme-1","newsletter_enable":true,"newsletter_heading":"Subscribe to our emails","enable_follow_on_shop":true,"show_social":true,"enable_country_selector":true,"enable_language_selector":true,"payment_enable":true,"show_policy":true,"margin_top":0,"padding_top":36,"padding_bottom":36}}},"order":["custom_footer_AAJ3Fq","footer"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "custom_footer_AAJ3Fq": {
+      "type": "custom-footer",
+      "blocks": {
+        "block_YQM6c8": {
+          "type": "block",
+          "settings": {
+            "social_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\">\n  <g clip-path=\"url(#clip0_215_895)\">\n    <path d=\"M23.0019 21.5839H23.2289L22.7939 20.9259C23.0599 20.9259 23.2009 20.7569 23.2029 20.5499C23.2029 20.5419 23.2029 20.5329 23.2019 20.5249C23.2019 20.2429 23.0319 20.1079 22.6829 20.1079H22.1189V21.5839H22.3309V20.9409H22.5919L23.0019 21.5839ZM22.5769 20.7739H22.3309V20.2749H22.6429C22.8039 20.2749 22.9879 20.3009 22.9879 20.5119C22.9879 20.7539 22.8029 20.7739 22.5769 20.7739Z\" fill=\"#231921\"></path>\n    <path d=\"M17.291 19.0729H14.284V14.3639C14.284 13.2409 14.264 11.7959 12.72 11.7959C11.154 11.7959 10.914 13.0189 10.914 14.2829V19.0729H7.908V9.38888H10.795V10.7119H10.835C11.424 9.70587 12.518 9.10487 13.683 9.14787C16.731 9.14787 17.292 11.1529 17.292 13.7599L17.291 19.0729ZM4.515 8.06487C3.551 8.06487 2.77 7.28388 2.77 6.31988C2.77 5.35588 3.551 4.57487 4.515 4.57487C5.479 4.57487 6.26 5.35588 6.26 6.31988C6.26 7.28388 5.479 8.06487 4.515 8.06487ZM6.018 19.0729H3.008V9.38888H6.018V19.0729ZM18.79 1.78287H1.497C0.68 1.77387 0.01 2.42887 0 3.24587V20.6099C0.01 21.4279 0.68 22.0829 1.497 22.0739H18.79C19.609 22.0839 20.282 21.4289 20.293 20.6099V3.24487C20.281 2.42587 19.608 1.77087 18.79 1.78187\" fill=\"#231921\"></path>\n    <path d=\"M22.603 19.4507C21.839 19.4577 21.225 20.0837 21.233 20.8477C21.24 21.6117 21.866 22.2257 22.63 22.2177C23.394 22.2107 24.008 21.5847 24 20.8207C23.993 20.0667 23.383 19.4577 22.63 19.4507H22.603ZM22.635 22.0587C21.965 22.0697 21.381 21.5367 21.37 20.8667C21.359 20.1967 21.893 19.6447 22.563 19.6337C23.233 19.6227 23.785 20.1567 23.796 20.8267C23.796 20.8337 23.796 20.8397 23.796 20.8467C23.81 21.5017 23.29 22.0447 22.635 22.0587H22.604H22.635Z\" fill=\"#231921\"></path>\n  </g>\n  <defs>\n    <clippath id=\"clip0_215_895\">\n      <rect width=\"24\" height=\"24\" fill=\"white\"></rect>\n    </clippath>\n  </defs>\n</svg>",
+            "social_link": "https://www.linkedin.com/company/marushikaofficial",
+            "social_alt_text": "linkedin"
+          }
+        },
+        "block_FzypQU": {
+          "type": "block",
+          "settings": {
+            "social_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\">\n  <g clip-path=\"url(#clip0_215_905)\">\n    <path d=\"M24 12.0723C24 18.0613 19.606 23.0263 13.87 23.9273V15.5643H16.659L17.19 12.1043H13.87V9.85927C13.87 8.91227 14.334 7.99027 15.82 7.99027H17.329V5.04427C17.329 5.04427 15.959 4.81027 14.65 4.81027C11.916 4.81027 10.13 6.46727 10.13 9.46627V12.1033H7.091V15.5633H10.13V23.9263C4.395 23.0243 0 18.0603 0 12.0723C0 5.44527 5.373 0.0722656 12 0.0722656C18.627 0.0722656 24 5.44427 24 12.0723Z\" fill=\"#231921\"></path>\n  </g>\n  <defs>\n    <clippath id=\"clip0_215_905\">\n      <rect width=\"24\" height=\"24\" fill=\"white\"></rect>\n    </clippath>\n  </defs>\n</svg>",
+            "social_link": "https://facebook.com/marushikaofficial",
+            "social_alt_text": "Facebook"
+          }
+        },
+        "block_8aUJrF": {
+          "type": "block",
+          "settings": {
+            "social_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\">\n  <g clip-path=\"url(#clip0_215_908)\">\n    <path d=\"M12 2.162C15.204 2.162 15.584 2.174 16.849 2.232C18.157 2.292 19.504 2.59 20.457 3.543C21.419 4.505 21.708 5.839 21.768 7.151C21.826 8.416 21.838 8.796 21.838 12C21.838 15.204 21.826 15.584 21.768 16.849C21.709 18.15 21.404 19.51 20.457 20.457C19.495 21.419 18.162 21.708 16.849 21.768C15.584 21.826 15.204 21.838 12 21.838C8.796 21.838 8.416 21.826 7.151 21.768C5.86 21.709 4.482 21.397 3.543 20.457C2.586 19.5 2.292 18.153 2.232 16.849C2.174 15.584 2.162 15.204 2.162 12C2.162 8.796 2.174 8.416 2.232 7.151C2.291 5.855 2.599 4.487 3.543 3.543C4.503 2.583 5.842 2.292 7.151 2.232C8.416 2.174 8.796 2.162 12 2.162ZM12 0C8.741 0 8.332 0.014 7.052 0.072C5.197 0.157 3.355 0.673 2.014 2.014C0.668 3.36 0.157 5.198 0.072 7.052C0.014 8.332 0 8.741 0 12C0 15.259 0.014 15.668 0.072 16.948C0.157 18.801 0.675 20.648 2.014 21.986C3.359 23.331 5.2 23.843 7.052 23.928C8.332 23.986 8.741 24 12 24C15.259 24 15.668 23.986 16.948 23.928C18.802 23.843 20.646 23.326 21.986 21.986C23.333 20.639 23.843 18.802 23.928 16.948C23.986 15.668 24 15.259 24 12C24 8.741 23.986 8.332 23.928 7.052C23.843 5.197 23.326 3.354 21.986 2.014C20.643 0.671 18.797 0.156 16.948 0.072C15.668 0.014 15.259 0 12 0Z\" fill=\"#231921\"></path>\n    <path d=\"M11.9999 5.83789C8.59689 5.83789 5.83789 8.59689 5.83789 11.9999C5.83789 15.4029 8.59689 18.1619 11.9999 18.1619C15.4029 18.1619 18.1619 15.4029 18.1619 11.9999C18.1619 8.59689 15.4029 5.83789 11.9999 5.83789ZM11.9999 15.9999C9.79089 15.9999 7.99989 14.2089 7.99989 11.9999C7.99989 9.79089 9.79089 7.99989 11.9999 7.99989C14.2089 7.99989 15.9999 9.79089 15.9999 11.9999C15.9999 14.2089 14.2089 15.9999 11.9999 15.9999Z\" fill=\"#231921\"></path>\n    <path d=\"M18.4048 7.0343C19.2001 7.0343 19.8448 6.38959 19.8448 5.5943C19.8448 4.79901 19.2001 4.1543 18.4048 4.1543C17.6096 4.1543 16.9648 4.79901 16.9648 5.5943C16.9648 6.38959 17.6096 7.0343 18.4048 7.0343Z\" fill=\"#231921\"></path>\n  </g>\n  <defs>\n    <clippath id=\"clip0_215_908\">\n      <rect width=\"24\" height=\"24\" fill=\"white\"></rect>\n    </clippath>\n  </defs>\n</svg>",
+            "social_link": "https://instagram.com/marushikaofficial",
+            "social_alt_text": "Instagram"
+          }
+        },
+        "block_qF9HK8": {
+          "type": "block",
+          "settings": {
+            "social_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\">\n  <path d=\"M23.498 6.18687C23.222 5.14787 22.409 4.32888 21.376 4.05088C19.505 3.54688 12 3.54688 12 3.54688C12 3.54688 4.495 3.54688 2.623 4.05088C1.591 4.32888 0.778 5.14687 0.502 6.18687C0 8.07087 0 12.0009 0 12.0009C0 12.0009 0 15.9309 0.502 17.8149C0.778 18.8539 1.591 19.6729 2.624 19.9509C4.495 20.4549 12 20.4549 12 20.4549C12 20.4549 19.505 20.4549 21.377 19.9509C22.409 19.6729 23.222 18.8549 23.499 17.8149C24 15.9309 24 12.0009 24 12.0009C24 12.0009 24 8.07087 23.498 6.18687ZM9.546 15.5699V8.43187L15.818 12.0009L9.546 15.5699Z\" fill=\"#231921\"></path>\n</svg>",
+            "social_link": "https://www.youtube.com/@marushikaofficial",
+            "social_alt_text": "Youtube"
+          }
+        }
+      },
+      "block_order": [
+        "block_YQM6c8",
+        "block_FzypQU",
+        "block_8aUJrF",
+        "block_qF9HK8"
+      ],
+      "settings": {
+        "logo": "shopify://shop_images/footer-logo.png",
+        "description": "Indulge in the essence of luxury. Stay updated for exclusive access to all things Marushika.",
+        "email_placeholder": "Enter email",
+        "submit_button_text": "Submit",
+        "column1_title": "Marushika’s Fusion of Art and Fashion",
+        "column1_text": "Marushika is a brand that emerges from the confluence of art and fashion, dedicated to creating wearable art that transcends both place and time.",
+        "column2_title": "Our Gallery",
+        "phone": "+971 52 745 2161",
+        "email": "support@marushikaofficial.com",
+        "location": "Location",
+        "boutique": "https://maps.app.goo.gl/zktgN1rkhCdow2yK6",
+        "location_desc": "A104, Building 5, Dubai Design District",
+        "boutique_desc_link": "https://maps.app.goo.gl/zktgN1rkhCdow2yK6",
+        "column3_title": "Marushika",
+        "column3_menu": "footer",
+        "column4_title": "Terms and Conditions",
+        "column4_menu": "terms-and-conditions",
+        "copyright_text": "2025 © Marushika Fashion L.L.C, All rights reserved."
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-1",
+        "newsletter_enable": true,
+        "newsletter_heading": "Subscribe to our emails",
+        "enable_follow_on_shop": true,
+        "show_social": true,
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "payment_enable": true,
+        "show_policy": true,
+        "margin_top": 0,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "custom_footer_AAJ3Fq",
+    "footer"
+  ]
+}
