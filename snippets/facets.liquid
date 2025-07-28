@@ -122,6 +122,8 @@
                   assign visual_layout_class = 'facets-layout facets-layout-list facets-layout-list--' | append: presentation
                 endif
               %}
+
+              <!-- added here excluding collection filter from specific collections -->
               {% assign excluded_collections = "kalista,sirikit,idaya,sirikit-ramadan,silk-scarf" | split: "," %}
               
               {% case filter.type %}
