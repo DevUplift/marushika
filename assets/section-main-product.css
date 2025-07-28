@@ -1,6 +1,5 @@
 /* -- added css following design start-- */
-   .product__media-toggle {display: none !important;}
-    .product__modal-opener .product__media-icon {display: none !important;}
+
 .product--stacked .product-stacked-width{
   width:100% !important;
 }
