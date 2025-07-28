@@ -122,10 +122,11 @@
                   assign visual_layout_class = 'facets-layout facets-layout-list facets-layout-list--' | append: presentation
                 endif
               %}
-              {% assign excluded_collections = "kalista,sirikit-capsule,idaya,sirikit-ramadan,silk-scarf" | split: "," %}
+              {% assign excluded_collections = "kalista,sirikit,idaya,sirikit-ramadan,silk-scarf" | split: "," %}
               
               {% case filter.type %}
                 {% when 'boolean', 'list' %}
+                
                 {% unless excluded_collections contains collection.handle and filter.label == "Collection" %}
                   <details
                     id="Details-{{ filter.param_name | escape }}-{{ section.id }}"
