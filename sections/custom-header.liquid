@@ -467,7 +467,7 @@
 
       <div style="display:flex;">
         <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
-          class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %} color_black_a{% if template == 'collection' or request.path == '/pages/about-us' or request.path == '/' %}color_white_a{% endif %}"
+          class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %} color_black_a {% if template == 'collection' or request.path == '/pages/about-us' or request.path == '/' %}color_white_a{% endif %}"
         >
           {%- if section.settings.enable_customer_avatar -%}
             <account-icon>
@@ -491,7 +491,7 @@
           </span>
         </a>
 
-        <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset color_black_a{% if template == 'collection' or request.path == '/pages/about-us' or request.path == '/' %}color_white_a{% endif %}" id="cart-icon-bubble">
+        <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset color_black_a {% if template == 'collection' or request.path == '/pages/about-us' or request.path == '/' %}color_white_a{% endif %}" id="cart-icon-bubble">
           {% if cart == empty %}
             <span class="svg-wrapper">{{ 'icon-cart-empty.svg' | inline_asset_content }}</span>
           {% else %}
