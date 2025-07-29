@@ -64,7 +64,7 @@
   {% assign excluded_collections = "kalista,sirikit,idaya,sirikit-ramadan,silk-scarf" | split: "," %}
   class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
 >
-  {%- if collection.handle == 'kalista' -%}
+  {%- if excluded_collections contains collection.handle -%}
   {%- paginate collection.products by 13 -%}
     
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
