@@ -61,6 +61,7 @@
       style="margin-top:15rem;"
     {% endif %}
   {% endcomment %}
+  {% assign excluded_collections = "kalista,sirikit,idaya,sirikit-ramadan,silk-scarf" | split: "," %}
   class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
 >
   {%- if collection.handle == 'kalista' -%}
