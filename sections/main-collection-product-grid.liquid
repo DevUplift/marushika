@@ -65,7 +65,7 @@
   class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
 >
   {%- if excluded_collections contains collection.handle -%}
-  {%- paginate collection.products by 13 -%}
+  {%- paginate collection.products by 14 -%}
     
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
     {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
