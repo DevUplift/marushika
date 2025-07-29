@@ -127,7 +127,7 @@ product-info {
 
 @media screen and (min-width: 990px) {
   .padding-product{
-    padding: 4.8rem 0 !important;
+    /* padding: 4.8rem 0 !important; */
   }
   .product--large:not(.product--no-media) .product__media-wrapper {
     max-width: 50%;
