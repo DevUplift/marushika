@@ -292,12 +292,6 @@
     </div>
   </div>
 
-  {% if customer %}
-  <p>{{ customer.email }}</p>
-    <script>
-    window.loggedInCustomerEmail = "{{ customer.email | escape }}";
-  </script>
-{% endif %}
 </footer>
 
 {% schema %}
