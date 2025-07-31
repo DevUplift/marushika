@@ -92,9 +92,11 @@
               $email: window.loggedInCustomerEmail
             },
             properties: {
+              $source: "precheckout-form",
               page_url: window.location.href,
               form_id: "XTF6id"
-            }
+            },
+            unique_id: `abandonment-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
           };
       
           console.log('📤 Payload:', payload);
