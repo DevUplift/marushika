@@ -291,6 +291,12 @@
       <p class="f5">{{ section.settings.copyright_text }}</p>
     </div>
   </div>
+
+  {% if customer %}
+  <script>
+    window.loggedInCustomerEmail = "{{ customer.email | escape }}";
+  </script>
+{% endif %}
 </footer>
 
 {% schema %}
