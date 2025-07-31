@@ -55,6 +55,10 @@
   }
 {%- endstyle -%}
 
+{% assign available_products = collection.products | where: 'available' %}
+{% assign out_of_stock_products = collection.products | where: 'available', false %}
+{% assign products = available_products | concat: out_of_stock_products %}
+
 <div
   {% comment %}
     {% if collection.handle != 'all' %}
@@ -152,9 +156,6 @@
           data-cascade
         {% endif %}
       >
-        {% assign available_products = collection.products | where: 'available' %}
-        {% assign out_of_stock_products = collection.products | where: 'available', false %}
-        {% assign products = available_products | concat: out_of_stock_products %}
 
         {%- if collection.products.size == 0 -%}
           <div class="collection collection--empty page-width" id="product-grid" data-id="{{ section.id }}">
