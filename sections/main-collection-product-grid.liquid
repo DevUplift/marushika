@@ -152,6 +152,10 @@
           data-cascade
         {% endif %}
       >
+        {% assign available_products = collection.products | where: 'available' %}
+        {% assign out_of_stock_products = collection.products | where: 'available', false %}
+        {% assign products = available_products | concat: out_of_stock_products %}
+
         {%- if collection.products.size == 0 -%}
           <div class="collection collection--empty page-width" id="product-grid" data-id="{{ section.id }}">
             <div class="loading-overlay gradient"></div>
@@ -183,7 +187,7 @@
             >
               {% assign skip_card_product_styles = false %}
               {%- assign snippet_inserted = false -%}
-              {%- for product in collection.products -%}
+              {% for product in products %}
                 {% assign lazy_load = false %}
                 {%- if forloop.index > 2 -%}
                   {%- assign lazy_load = true -%}
