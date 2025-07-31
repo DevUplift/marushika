@@ -43,34 +43,43 @@
 {% endif %}
 
 <script>
-  window._klOnsite = window._klOnsite || [];
-  window._klOnsite.push(['openForm', 'XTF6id']);
+    window._klOnsite = window._klOnsite || [];
+    window._klOnsite.push(['openForm', 'XTF6id']);
 
-
-  document.addEventListener('DOMContentLoaded', function () {
-    const form = document.querySelector('[data-testid="klaviyo-form-XTF6id"]');
-    let formSubmitted = false;
-
-    if (form) {
-      form.addEventListener('submit', function () {
-        formSubmitted = true;
-      });
-    }
-
-    window.addEventListener('beforeunload', function () {
-      if (!formSubmitted && window.loggedInCustomerEmail) {
-        const payload = {
-          token: "VwWUpX",
-          event: "Pre-Checkout Form Abandoned",
-          customer_properties: {
-            $email: window.loggedInCustomerEmail
-          }
-        };
-
-        const encoded = btoa(JSON.stringify(payload));
-        navigator.sendBeacon("https://a.klaviyo.com/api/track?data=" + encoded);
+  function waitForForm(selector, callback, timeout = 5000) {
+    const startTime = Date.now();
+    const interval = setInterval(() => {
+      const form = document.querySelector(selector);
+      if (form) {
+        clearInterval(interval);
+        callback(form);
+      } else if (Date.now() - startTime > timeout) {
+        clearInterval(interval);
+        console.warn('Form not found in time:', selector);
       }
+    }, 100);
+  }
+
+  // Usage
+  waitForForm('[data-testid="klaviyo-form-XTF6id"]', function(form) {
+    form.addEventListener('submit', function () {
+      formSubmitted = true;
     });
   });
 
+      window.addEventListener('beforeunload', function () {
+        if (!formSubmitted && window.loggedInCustomerEmail) {
+          const payload = {
+            token: "VwWUpX",
+            event: "Pre-Checkout Form Abandoned",
+            customer_properties: {
+              $email: window.loggedInCustomerEmail
+            }
+          };
+
+          const encoded = btoa(JSON.stringify(payload));
+          navigator.sendBeacon("https://a.klaviyo.com/api/track?data=" + encoded);
+        }
+      });
+    });
 </script>
