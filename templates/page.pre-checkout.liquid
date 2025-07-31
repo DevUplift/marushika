@@ -68,6 +68,7 @@
       });
 
       window.addEventListener('beforeunload', function () {
+        console.log('🔥 beforeunload triggered');
         if (!formSubmitted && window.loggedInCustomerEmail) {
           console.log('✅ Pre-checkout abandonment detected');
           console.log('📧 Email:', window.loggedInCustomerEmail);
