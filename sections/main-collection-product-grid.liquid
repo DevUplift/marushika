@@ -187,6 +187,7 @@
             >
               {% assign skip_card_product_styles = false %}
               {%- assign snippet_inserted = false -%}
+              <!-- {% comment %}{%- for product in collection.products -%}{% endcomment %} added below line to move sold out to below -->
               {% for product in products %}
                 {% assign lazy_load = false %}
                 {%- if forloop.index > 2 -%}
