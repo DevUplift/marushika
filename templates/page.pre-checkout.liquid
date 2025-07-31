@@ -36,7 +36,46 @@
   }
 </style>
 
+{% if customer %}
+  <script>
+    window.loggedInCustomerEmail = "{{ customer.email | escape }}";
+  </script>
+{% endif %}
+
 <script>
   window._klOnsite = window._klOnsite || [];
   window._klOnsite.push(['openForm', 'XTF6id']);
+
+
+  // Wait until the DOM is ready
+  document.addEventListener('DOMContentLoaded', function () {
+    const klaviyoForm = document.querySelector('[data-testid="klaviyo-form-XTF6id"]');
+    let formSubmitted = false;
+
+    if (klaviyoForm) {
+      klaviyoForm.addEventListener('submit', function () {
+        formSubmitted = true;
+      });
+    }
+
+    // Detect when user leaves the page without submitting
+    window.addEventListener('beforeunload', function () {
+      if (!formSubmitted && window.loggedInCustomerEmail) {
+        const payload = {
+          token: 'YOUR_KLAVIYO_PUBLIC_API_KEY', // optional for this simple track call
+          event: 'Pre-Checkout Form Abandoned',
+          customer_properties: {
+            $email: window.loggedInCustomerEmail
+          }
+        };
+
+        // Use sendBeacon to reliably fire before the page unloads
+        navigator.sendBeacon(
+          'https://a.klaviyo.com/api/track',
+          new Blob([JSON.stringify(payload)], { type: 'application/json' })
+        );
+      }
+    });
+  });
+
 </script>
