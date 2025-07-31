@@ -35,72 +35,62 @@
     padding: 2rem !important;
   }
 </style>
-
-{% if customer %}
-  <script>
-    window.loggedInCustomerEmail = "{{ customer.email | escape }}";
-  </script>
-{% else %}
-  <script>
-    window.loggedInCustomerEmail = null;
-  </script>
-{% endif %}
-
 <script>
-  // Prevent double initialization
-  if (window.preCheckoutTrackingInitialized) return;
-  window.preCheckoutTrackingInitialized = true;
+  (function () {
+    // Prevent double initialization
+    if (window.preCheckoutTrackingInitialized) return;
+    window.preCheckoutTrackingInitialized = true;
 
-  window._klOnsite = window._klOnsite || [];
-  window._klOnsite.push(['openForm', 'XTF6id']);
+    window._klOnsite = window._klOnsite || [];
+    window._klOnsite.push(['openForm', 'XTF6id']);
 
-  document.addEventListener('DOMContentLoaded', function () {
-    let formSubmitted = false;
+    document.addEventListener('DOMContentLoaded', function () {
+      let formSubmitted = false;
 
-    // Wait for Klaviyo form to be rendered
-    function waitForForm(selector, callback, timeout = 5000) {
-      const startTime = Date.now();
-      const interval = setInterval(() => {
-        const form = document.querySelector(selector);
-        if (form) {
-          clearInterval(interval);
-          callback(form);
-        } else if (Date.now() - startTime > timeout) {
-          clearInterval(interval);
-          console.warn('Klaviyo form not found:', selector);
+      function waitForForm(selector, callback, timeout = 5000) {
+        const startTime = Date.now();
+        const interval = setInterval(() => {
+          const form = document.querySelector(selector);
+          if (form) {
+            clearInterval(interval);
+            callback(form);
+          } else if (Date.now() - startTime > timeout) {
+            clearInterval(interval);
+            console.warn('Klaviyo form not found:', selector);
+          }
+        }, 100);
+      }
+
+      waitForForm('[data-testid="klaviyo-form-XTF6id"]', function(form) {
+        form.addEventListener('submit', function () {
+          formSubmitted = true;
+        });
+      });
+
+      window.addEventListener('beforeunload', function () {
+        if (!formSubmitted && window.loggedInCustomerEmail) {
+          const payload = {
+            token: "VwWUpX",
+            event: "Pre-Checkout Form Abandoned",
+            customer_properties: {
+              $email: window.loggedInCustomerEmail
+            },
+            properties: {
+              $source: "precheckout-form",
+              page_url: window.location.href,
+              form_id: "XTF6id"
+            }
+          };
+
+          try {
+            const encoded = btoa(JSON.stringify(payload));
+            const url = "https://a.klaviyo.com/api/track?data=" + encoded;
+            navigator.sendBeacon(url);
+          } catch (error) {
+            console.error('Failed to send beacon:', error);
+          }
         }
-      }, 100);
-    }
-
-    waitForForm('[data-testid="klaviyo-form-XTF6id"]', function(form) {
-      form.addEventListener('submit', function () {
-        formSubmitted = true;
       });
     });
-
-    window.addEventListener('beforeunload', function () {
-      if (!formSubmitted && window.loggedInCustomerEmail) {
-        const payload = {
-          token: "VwWUpX",
-          event: "Pre-Checkout Form Abandoned",
-          customer_properties: {
-            $email: window.loggedInCustomerEmail
-          },
-          properties: {
-            $source: "precheckout-form",
-            page_url: window.location.href,
-            form_id: "XTF6id"
-          }
-        };
-
-        try {
-          const encoded = btoa(JSON.stringify(payload));
-          const url = "https://a.klaviyo.com/api/track?data=" + encoded;
-          navigator.sendBeacon(url);
-        } catch (error) {
-          console.error('Failed to send beacon:', error);
-        }
-      }
-    });
-  });
+  })();
 </script>
