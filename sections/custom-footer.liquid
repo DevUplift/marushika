@@ -293,7 +293,8 @@
   </div>
 
   {% if customer %}
-  <script>
+  <p>{{ customer.email }}</p>
+    <script>
     window.loggedInCustomerEmail = "{{ customer.email | escape }}";
   </script>
 {% endif %}
