@@ -62,7 +62,7 @@
     window.addEventListener('beforeunload', function () {
       if (!formSubmitted && window.loggedInCustomerEmail) {
         const payload = {
-          token: 'YOUR_KLAVIYO_PUBLIC_API_KEY', // optional for this simple track call
+          token: 'VwWUpX', // optional for this simple track call
           event: 'Pre-Checkout Form Abandoned',
           customer_properties: {
             $email: window.loggedInCustomerEmail
