@@ -77,24 +77,41 @@
       });
 
       window.addEventListener('beforeunload', function () {
-        console.log('🔥 beforeunload triggered');
+        console.log('🔥 beforeunload: Checking abandonment...');
+      
+        console.log('formSubmitted =', formSubmitted);
+        console.log('window.loggedInCustomerEmail =', window.loggedInCustomerEmail);
+      
         if (!formSubmitted && window.loggedInCustomerEmail) {
-          console.log('✅ Pre-checkout abandonment detected');
-          console.log('📧 Email:', window.loggedInCustomerEmail);
+          console.log('✅ Condition met — sending beacon');
       
-          const payload = { /* ... */ };
-          console.log('📤 Sending payload:', payload);
+          const payload = {
+            token: "VwWUpX",
+            event: "Pre-Checkout Form Abandoned",
+            customer_properties: {
+              $email: window.loggedInCustomerEmail
+            },
+            properties: {
+              page_url: window.location.href,
+              form_id: "XTF6id"
+            }
+          };
       
-          const encoded = btoa(JSON.stringify(payload));
-          const url = "https://a.klaviyo.com/api/track?data=" + encoded;
-          console.log('🔗 Beacon URL:', url);
+          console.log('📤 Payload:', payload);
       
-          navigator.sendBeacon(url);
-          console.log('🚀 Beacon sent');
+          try {
+            const encoded = btoa(JSON.stringify(payload));
+            const url = "https://a.klaviyo.com/api/track?data=" + encoded;
+            console.log('🔗 Beacon URL:', url);
+            navigator.sendBeacon(url);
+            console.log('🚀 Beacon sent via sendBeacon');
+          } catch (error) {
+            console.error('❌ Beacon failed:', error);
+          }
         } else {
-          console.log('🚫 No abandonment event sent');
-          if (!window.loggedInCustomerEmail) console.log('❌ No logged-in email');
-          if (formSubmitted) console.log('✅ Form was submitted');
+          console.log('🚫 Beacon NOT sent — conditions not met');
+          if (formSubmitted) console.log('   → form was submitted');
+          if (!window.loggedInCustomerEmail) console.log('   → no logged-in email');
         }
       });
     });
