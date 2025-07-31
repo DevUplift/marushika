@@ -35,6 +35,15 @@
     padding: 2rem !important;
   }
 </style>
+{% if customer %}
+  <script>
+    window.loggedInCustomerEmail = "{{ customer.email | escape }}";
+  </script>
+{% else %}
+  <script>
+    window.loggedInCustomerEmail = null;
+  </script>
+{% endif %}
 <script>
   (function () {
     // Prevent double initialization
