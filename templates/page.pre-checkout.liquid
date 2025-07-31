@@ -46,7 +46,6 @@
 {% endif %}
 <script>
   (function () {
-    // Prevent double initialization
     if (window.preCheckoutTrackingInitialized) return;
     window.preCheckoutTrackingInitialized = true;
 
@@ -78,13 +77,12 @@
 
       window.addEventListener('beforeunload', function () {
         console.log('🔥 beforeunload: Checking abandonment...');
-      
         console.log('formSubmitted =', formSubmitted);
         console.log('window.loggedInCustomerEmail =', window.loggedInCustomerEmail);
-      
+
         if (!formSubmitted && window.loggedInCustomerEmail) {
-          console.log('✅ Condition met — sending beacon');
-      
+          console.log('✅ Condition met — sending event');
+
           const payload = {
             token: "VwWUpX",
             event: "Pre-Checkout Form Abandoned",
@@ -98,20 +96,18 @@
             },
             unique_id: `abandonment-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
           };
-      
-          console.log('📤 Payload:', payload);
-      
+
+          const url = "https://a.klaviyo.com/api/track?data=" + btoa(JSON.stringify(payload));
+
+          // Use fetch instead of sendBeacon for better reliability
           try {
-            const encoded = btoa(JSON.stringify(payload));
-            const url = "https://a.klaviyo.com/api/track?data=" + encoded;
-            console.log('🔗 Beacon URL:', url);
-            navigator.sendBeacon(url);
-            console.log('🚀 Beacon sent via sendBeacon');
+            fetch(url, { method: "GET", mode: "no-cors" });
+            console.log('🚀 Event sent via fetch');
           } catch (error) {
-            console.error('❌ Beacon failed:', error);
+            console.error('❌ Fetch failed:', error);
           }
         } else {
-          console.log('🚫 Beacon NOT sent — conditions not met');
+          console.log('🚫 Event NOT sent — conditions not met');
           if (formSubmitted) console.log('   → form was submitted');
           if (!window.loggedInCustomerEmail) console.log('   → no logged-in email');
         }
