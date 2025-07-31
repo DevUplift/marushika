@@ -69,26 +69,22 @@
 
       window.addEventListener('beforeunload', function () {
         if (!formSubmitted && window.loggedInCustomerEmail) {
-          const payload = {
-            token: "VwWUpX",
-            event: "Pre-Checkout Form Abandoned",
-            customer_properties: {
-              $email: window.loggedInCustomerEmail
-            },
-            properties: {
-              $source: "precheckout-form",
-              page_url: window.location.href,
-              form_id: "XTF6id"
-            }
-          };
-
-          try {
-            const encoded = btoa(JSON.stringify(payload));
-            const url = "https://a.klaviyo.com/api/track?data=" + encoded;
-            navigator.sendBeacon(url);
-          } catch (error) {
-            console.error('Failed to send beacon:', error);
-          }
+          console.log('✅ Pre-checkout abandonment detected');
+          console.log('📧 Email:', window.loggedInCustomerEmail);
+      
+          const payload = { /* ... */ };
+          console.log('📤 Sending payload:', payload);
+      
+          const encoded = btoa(JSON.stringify(payload));
+          const url = "https://a.klaviyo.com/api/track?data=" + encoded;
+          console.log('🔗 Beacon URL:', url);
+      
+          navigator.sendBeacon(url);
+          console.log('🚀 Beacon sent');
+        } else {
+          console.log('🚫 No abandonment event sent');
+          if (!window.loggedInCustomerEmail) console.log('❌ No logged-in email');
+          if (formSubmitted) console.log('✅ Form was submitted');
         }
       });
     });
