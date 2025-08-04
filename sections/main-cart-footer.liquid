@@ -104,7 +104,6 @@
                 </small>
               </div>
             {%- else -%}
-            {% comment %}
               <div class="cart__ctas" {{ block.shopify_attributes }}>
                 <button
                   type="submit"
@@ -120,7 +119,7 @@
                 </button>
               </div>
             
-            {% endcomment %}
+            {% comment %}
               <div class="cart__ctas" {{ block.shopify_attributes }}>
                 <button
                   type="button"
@@ -136,6 +135,7 @@
                 </button>
               </div>
 
+            {% endcomment %}
               {%- if additional_checkout_buttons -%}
                 <div class="cart__dynamic-checkout-buttons additional-checkout-buttons">
                   {{ content_for_additional_checkout_buttons }}
