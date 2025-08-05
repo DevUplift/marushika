@@ -96,6 +96,15 @@
     "blogs_custom_N8bqHB": {
       "type": "blogs-custom",
       "blocks": {
+        "blog_FLHd6J": {
+          "type": "blog",
+          "settings": {
+            "image": "shopify://shop_images/Vogue_article.png",
+            "title": "A New Homegrown Luxury Fashion House Has Arrived In The Middle East - A&E",
+            "link": "https://www.voguearabia.com/article/kalista-by-marushika-a-celebration-of-indian-craftsmanship-and-feminine-grace",
+            "mini_title": "VOGUE ARABIA"
+          }
+        },
         "blog_eFHwVb": {
           "type": "blog",
           "settings": {
@@ -122,23 +131,13 @@
             "link": "https://www.lahamag.com/article/221087-%D9%85%D8%A7%D9%86%D9%8A%D8%B4%D8%A7-%D9%81%D9%8A%D8%B1%D9%85%D8%A7-%D9%85%D8%A4%D8%B3%D8%B3%D8%A9-%D8%B9%D9%84%D8%A7%D9%85%D8%A9-marushika-%D8%AA%D8%B5%D8%A7%D9%85%D9%8A%D9%85-%D8%AA%D8%B1%D9%88%D9%8A-%D8%AD%D9%83%D8%A7%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D8%AA%D8%B1%D8%A7%D8%AB",
             "mini_title": "Laha"
           }
-        },
-        "blog_FLHd6J": {
-          "type": "blog",
-          "disabled": true,
-          "settings": {
-            "image": "shopify://shop_images/blog3-min.jpg",
-            "title": "A New Homegrown Luxury Fashion House Has Arrived In The Middle East - A&E",
-            "link": "https://aeworld.com/fashion/a-new-homegrown-luxury-fashion-house-has-arrived-in-the-middle-east/",
-            "mini_title": ""
-          }
         }
       },
       "block_order": [
+        "blog_FLHd6J",
         "blog_eFHwVb",
         "blog_4myFxd",
-        "blog_pHBf3F",
-        "blog_FLHd6J"
+        "blog_pHBf3F"
       ],
       "settings": {
         "triple_line_sub_title": "In the Spotlight",
