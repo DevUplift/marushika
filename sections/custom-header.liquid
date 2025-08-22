@@ -143,7 +143,7 @@
 
   .site-header nav a {
     color: var(--primary-color);
-    {% if collection.handle == 'all' or template.name == 'product' or request.path == '/cart' or request.path == '/policies/privacy-policy' or request.path == '/policies/terms-of-service' or request.path == '/policies/shipping-policy' %}
+    {% if collection.handle == 'all' or template.name == 'product' or request.path == '/cart' or request.path == '/policies/privacy-policy' or request.path == '/policies/terms-of-service' or request.path == '/policies/shipping-policy' or template.name == 'article' %}
     color: var(--primary-color) !important;
     {% endif %}
   }
