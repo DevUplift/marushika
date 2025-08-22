@@ -375,7 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
     {% sections 'header-group' %}
 
-    <main id="MainContent" class="content-for-layout focus-none {% if  collection.handle == 'all' or template.name == 'product' or request.path == '/policies/terms-of-service' or request.path == '/policies/privacy-policy' or request.path == '/policies/shipping-policy' or request.path == '/cart' %} main-content-margin{% endif %}" role="main" tabindex="-1">
+    <main id="MainContent" class="content-for-layout focus-none {% if  collection.handle == 'all' or template.name == 'product' or request.path == '/policies/terms-of-service' or request.path == '/policies/privacy-policy' or request.path == '/policies/shipping-policy' or request.path == '/cart' or request.path == '/blogs' %} main-content-margin{% endif %}" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
       <div class="sticky-icons">
