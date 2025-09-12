@@ -37,6 +37,13 @@
         padding-bottom: {{ section.settings.padding_bottom }}px;
       }
     }
+
+    .template-product .shopify-payment-button__button--apple-pay,
+.template-cart .shopify-payment-button__button--apple-pay,
+.template-product .shopify-payment-button__button--google-pay,
+.template-cart .shopify-payment-button__button--google-pay {
+  display: none !important;
+}
   {%- endstyle -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
