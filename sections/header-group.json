@@ -1,1 +1,88 @@
-{"name":"t:sections.header.name","type":"header","sections":{"announcement-bar":{"type":"announcement-bar","blocks":{"announcement-bar-0":{"type":"announcement","settings":{"text":"Free shipping is available for orders above 5000 AED in UAE. For international shipping WhatsApp us at +97152 745 2161","link":"","link_extra_text":"Reserve an experience","link_extra":"https:\/\/booking.marushikaofficial.com\/"}}},"block_order":["announcement-bar-0"],"disabled":true,"settings":{"color_scheme":"scheme-1","show_line_separator":true,"show_social":false,"auto_rotate":false,"change_slides_speed":5,"enable_country_selector":false,"enable_language_selector":false}},"header":{"type":"header","disabled":true,"settings":{"logo_position":"middle-center","menu":"main-menu","menu_type_desktop":"dropdown","sticky_header_type":"reduce-logo-size","show_line_separator":true,"color_scheme":"scheme-1","menu_color_scheme":"scheme-1","enable_country_selector":true,"enable_language_selector":true,"enable_customer_avatar":true,"mobile_logo_position":"center","margin_bottom":0,"padding_top":20,"padding_bottom":20}},"custom_header_cbHHbH":{"type":"custom-header","blocks":{"announcement_tVhTQk":{"type":"announcement","settings":{"message":"Free shipping on orders above 5000AED in UAE. For International Shipping, WhatsApp us at +971 52 745 2161"}}},"block_order":["announcement_tVhTQk"],"settings":{"show_announcement":true,"announcement_style":"static","speed":20,"menu":"main-menu","sec-menu":"secondary-menu"}}},"order":["announcement-bar","header","custom_header_cbHHbH"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement-bar-0": {
+          "type": "announcement",
+          "settings": {
+            "text": "Free shipping is available for orders above 5000 AED in UAE. For international shipping WhatsApp us at +97152 745 2161",
+            "link": "",
+            "link_extra_text": "Reserve an experience",
+            "link_extra": "https://booking.marushikaofficial.com/"
+          }
+        }
+      },
+      "block_order": [
+        "announcement-bar-0"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-1",
+        "show_line_separator": true,
+        "show_social": false,
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "enable_country_selector": false,
+        "enable_language_selector": false
+      }
+    },
+    "header": {
+      "type": "header",
+      "disabled": true,
+      "settings": {
+        "logo_position": "middle-center",
+        "menu": "main-menu",
+        "menu_type_desktop": "dropdown",
+        "sticky_header_type": "reduce-logo-size",
+        "show_line_separator": true,
+        "color_scheme": "scheme-1",
+        "menu_color_scheme": "scheme-1",
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "enable_customer_avatar": true,
+        "mobile_logo_position": "center",
+        "margin_bottom": 0,
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "custom_header_cbHHbH": {
+      "type": "custom-header",
+      "blocks": {
+        "announcement_tVhTQk": {
+          "type": "announcement",
+          "settings": {
+            "message": "Free shipping on orders above 1000 AED in UAE. For International Shipping, WhatsApp us at +971 52 745 2161"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_tVhTQk"
+      ],
+      "settings": {
+        "show_announcement": true,
+        "announcement_style": "static",
+        "speed": 20,
+        "menu": "main-menu",
+        "sec-menu": "secondary-menu"
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header",
+    "custom_header_cbHHbH"
+  ]
+}
