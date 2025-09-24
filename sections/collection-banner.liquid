@@ -1,0 +1,387 @@
+<style>
+  .collection-banner-section {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 var(--grid-mobile-horizontal-spacing);
+  }
+
+  @media screen and (min-width: 750px) {
+    .collection-banner-section {
+      padding: 0 var(--grid-desktop-horizontal-spacing);
+    }
+  }
+
+  .collection-banner-video-container {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    min-height: 500px;
+    overflow: hidden;
+  }
+
+  .collection-banner-background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .collection-banner-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: {{ section.settings.text_alignment }};
+    padding: 6rem 4.8rem;
+    background-color: {{ section.settings.text_background_color }};
+    text-align: {{ section.settings.text_alignment }};
+  }
+
+  @media (max-width: 768px) {
+    .collection-banner-video-container {
+      height: 50vh;
+      min-height: 400px;
+    }
+    
+    .collection-banner-container {
+      padding: 6rem 2.4rem;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+
+  .collection-banner-content {
+    position: relative;
+    max-width: 800px;
+    text-align: {{ section.settings.text_alignment }};
+  }
+
+  @media (max-width: 768px) {
+    .collection-banner-content {
+      max-width: 100%;
+      text-align: center;
+    }
+  }
+
+  .collection-banner-title {
+    color: {{ section.settings.title_color }};
+    font-family: 'Gretha', sans-serif;
+    font-size: {{ section.settings.title_size }}px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 768px) {
+    .collection-banner-title {
+      font-size: {{ section.settings.title_size | times: 0.7 }}px;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .collection-banner-description {
+    color: {{ section.settings.description_color }};
+    font-size: {{ section.settings.description_size }}px;
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: 0;
+    max-width: 600px;
+  }
+
+  @media (max-width: 768px) {
+    .collection-banner-description {
+      font-size: {{ section.settings.description_size | times: 0.9 }}px;
+    }
+  }
+
+  .collection-banner-button {
+    display: inline-block;
+    padding: 1.2rem 2.4rem;
+    background-color: {{ section.settings.button_bg_color }};
+    color: {{ section.settings.button_text_color }};
+    text-decoration: none;
+    border: 2px solid {{ section.settings.button_border_color }};
+    border-radius: 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .collection-banner-button:hover {
+    background-color: {{ section.settings.button_hover_bg_color }};
+    color: {{ section.settings.button_hover_text_color }};
+    border-color: {{ section.settings.button_hover_border_color }};
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .collection-banner-button {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+    }
+  }
+
+  /* Animation classes */
+  .scroll-trigger.animate--fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .scroll-trigger.animate--fade-in.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scroll-trigger.animate--slide-in {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .scroll-trigger.animate--slide-in.animate {
+    opacity: 1;
+    transform: translateX(0);
+  }
+</style>
+
+<section class="collection-banner-section" id="CollectionBanner-{{ section.id }}">
+  {% if section.settings.text_position == 'above' %}
+    <!-- Text Content Container (Above Video) -->
+    <div class="collection-banner-container">
+      <div class="collection-banner-content scroll-trigger animate--fade-in">
+        {% if section.settings.title != blank %}
+          <h1 class="collection-banner-title">
+            {{ section.settings.title }}
+          </h1>
+        {% endif %}
+        
+        {% if section.settings.description != blank %}
+          <div class="collection-banner-description">
+            {{ section.settings.description }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Video/Image Container -->
+  <div class="collection-banner-video-container">
+    {% if section.settings.video_file != blank %}
+      <video 
+        autoplay 
+        muted 
+        loop 
+        playsinline 
+        oncontextmenu="return false;" 
+        preload="auto" 
+        class="collection-banner-background"
+      >
+        <source src="{{ section.settings.video_file.sources[1].url }}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    {% elsif section.settings.image_file != blank %}
+      <img 
+        src="{{ section.settings.image_file | img_url: 'master' }}" 
+        alt="{{ section.settings.image_alt | default: 'Collection Banner' }}" 
+        class="collection-banner-background" 
+        loading="lazy"
+      >
+    {% else %}
+      <div class="collection-banner-background" style="background-color: #f5f5f5;"></div>
+    {% endif %}
+  </div>
+
+  {% if section.settings.text_position == 'below' %}
+    <!-- Text Content Container (Below Video) -->
+    <div class="collection-banner-container">
+      <div class="collection-banner-content scroll-trigger animate--fade-in">
+        {% if section.settings.title != blank %}
+          <h1 class="collection-banner-title">
+            {{ section.settings.title }}
+          </h1>
+        {% endif %}
+        
+        {% if section.settings.description != blank %}
+          <div class="collection-banner-description">
+            {{ section.settings.description }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+</section>
+
+<script>
+  // Simple scroll animation trigger
+  document.addEventListener('DOMContentLoaded', function() {
+    const elements = document.querySelectorAll('.scroll-trigger');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+    
+    elements.forEach(element => {
+      observer.observe(element);
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Collection Banner",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Media Settings"
+    },
+    {
+      "type": "video",
+      "id": "video_file",
+      "label": "Background Video",
+      "info": "Upload a video file for the background"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_file",
+      "label": "Background Image",
+      "info": "Fallback image if no video is provided"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image Alt Text",
+      "default": "Collection Banner"
+    },
+    {
+      "type": "header",
+      "content": "Text Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "MEHEROON COLLECTION 2025"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Our latest collection brings together timeless designs and modern comfort, made to elevate your everyday style."
+    },
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "select",
+      "id": "text_position",
+      "label": "Text Position",
+      "options": [
+        {
+          "value": "above",
+          "label": "Above Video"
+        },
+        {
+          "value": "below",
+          "label": "Below Video"
+        }
+      ],
+      "default": "below"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Typography Settings"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Title Size",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Size",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Color Settings"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "text_background_color",
+      "label": "Text Background Color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Banner",
+      "settings": {
+        "title": "MEHEROON COLLECTION 2025",
+        "description": "Our latest collection brings together timeless designs and modern comfort, made to elevate your everyday style."
+      }
+    }
+  ]
+}
+{% endschema %}

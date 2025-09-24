@@ -1,0 +1,613 @@
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-article-card.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .blog-carousel {
+    background-color: {{ section.settings.background_color | default: '#2c2c2c' }};
+    color: {{ section.settings.text_color | default: '#ffffff' }};
+  }
+
+  .blog-carousel__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4rem;
+  }
+
+  .blog-carousel__title {
+    color: {{ section.settings.title_color | default: '#ffffff' }} !important;
+    font-size: 3.2rem;
+    font-weight: 600;
+    margin: 0;
+    text-decoration: none !important;
+  }
+
+  .blog-carousel__title:hover {
+    color: {{ section.settings.title_color | default: '#ffffff' }} !important;
+    text-decoration: none !important;
+  }
+
+  .blog-carousel__title:visited {
+    color: {{ section.settings.title_color | default: '#ffffff' }} !important;
+  }
+
+  .blog-carousel__title:link {
+    color: {{ section.settings.title_color | default: '#ffffff' }} !important;
+  }
+
+  .blog-carousel__navigation {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .blog-carousel__nav-button {
+    background: none;
+    border: none;
+    color: {{ section.settings.text_color | default: '#ffffff' }};
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 0.5rem;
+    opacity: 1;
+  }
+
+  .blog-carousel__nav-button:hover:not(:disabled) {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+
+  .blog-carousel__nav-button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .blog-carousel__nav-button svg {
+    /* width: 2.4rem; */
+    height: 2.4rem;
+  }
+
+  .blog-carousel__nav-button svg path {
+    stroke: {{ section.settings.text_color | default: '#ffffff' }};
+  }
+
+  .blog-carousel__container {
+    overflow: hidden;
+    width: 100%;
+    padding: 0 var(--grid-mobile-horizontal-spacing);
+  }
+
+  @media screen and (min-width: 750px) {
+    .blog-carousel__container {
+      padding: 0 var(--grid-desktop-horizontal-spacing);
+    }
+  }
+
+  .blog-carousel__grid {
+    display: flex;
+    gap: 2rem;
+    transition: transform 0.5s ease;
+    width: 100%;
+  }
+
+  .blog-carousel__item {
+    background: transparent;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    flex: 0 0 calc(50% - 1rem);
+    min-width: calc(50% - 1rem);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .blog-carousel__item:hover {
+    transform: translateY(-0.5rem);
+  }
+
+  .blog-carousel__image-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 4/5;
+  }
+
+  .blog-carousel__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .blog-carousel__item:hover .blog-carousel__image {
+    transform: scale(1.05);
+  }
+
+  .blog-carousel__content {
+    background: transparent;
+    padding: 2rem 0;
+    color: {{ section.settings.text_color | default: '#ffffff' }};
+    transition: all 0.3s ease;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 200px;
+  }
+
+  .blog-carousel__item-title {
+    font-size: 2.4rem;
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+    color: {{ section.settings.text_color | default: '#ffffff' }};
+  }
+
+  .blog-carousel__item-title a {
+    color: {{ section.settings.title_color | default: '#ffffff' }} !important;
+    text-decoration: none !important;
+  }
+
+  .blog-carousel__item-title a:hover {
+    color: {{ section.settings.title_color | default: '#ffffff' }} !important;
+    text-decoration: none !important;
+    opacity: 0.8;
+  }
+
+  .blog-carousel__item-title a:visited {
+    color: {{ section.settings.title_color | default: '#ffffff' }} !important;
+  }
+
+  .blog-carousel__item-title a:link {
+    color: {{ section.settings.title_color | default: '#ffffff' }} !important;
+  }
+
+  .blog-carousel__item-excerpt {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    margin: 0 0 2rem 0;
+    color: {{ section.settings.excerpt_color | default: '#cccccc' }};
+    opacity: 0.9;
+    flex: 1;
+  }
+
+  .blog-carousel__read-more {
+    color: {{ section.settings.read_more_color | default: '#ffd700' }};
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: all 0.3s ease;
+    margin-top: auto;
+    align-self: flex-start;
+    position: relative;
+  }
+
+  .blog-carousel__read-more::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: {{ section.settings.read_more_color | default: '#ffd700' }};
+    transition: all 0.3s ease;
+  }
+
+  .blog-carousel__read-more:hover {
+    color: {{ section.settings.read_more_color | default: '#ffd700' }};
+    opacity: 0.9;
+  }
+
+  /* Responsive Design */
+  @media screen and (max-width: 1024px) {
+    .blog-carousel__item {
+      flex: 0 0 calc(66.666% - 1rem);
+      min-width: calc(66.666% - 1rem);
+    }
+    
+    .blog-carousel__image-container {
+      aspect-ratio: 3/4;
+    }
+    
+    .blog-carousel__content {
+      padding: 1.5rem 0;
+      min-height: 180px;
+    }
+    
+    .blog-carousel__item-title {
+      font-size: 2rem;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .blog-carousel__header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .blog-carousel__title {
+      font-size: 2.4rem;
+    }
+    
+    .blog-carousel__item {
+      flex: 0 0 100%;
+      min-width: 100%;
+    }
+    
+    .blog-carousel__image-container {
+      aspect-ratio: 16/9;
+    }
+    
+    .blog-carousel__content {
+      padding: 1.5rem 0;
+      min-height: 160px;
+    }
+    
+    .blog-carousel__item-title {
+      font-size: 1.8rem;
+    }
+    
+    .blog-carousel__item-excerpt {
+      font-size: 1.2rem;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .blog-carousel__title {
+      font-size: 2rem;
+    }
+    
+    .blog-carousel__image-container {
+      aspect-ratio: 4/3;
+    }
+    
+    .blog-carousel__content {
+      padding: 1rem 0;
+      min-height: 140px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="blog-carousel section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="blog-carousel__header">
+      <h2 class="blog-carousel__title">{{ section.settings.heading | default: 'Media Presence' }}</h2>
+      <div class="blog-carousel__navigation">
+        <button class="blog-carousel__nav-button" id="prev-{{ section.id }}" aria-label="Previous">
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="13" viewBox="0 0 21 13" fill="none">
+            <path d="M0.469669 5.96967C0.176777 6.26256 0.176777 6.73744 0.469669 7.03033L5.24264 11.8033C5.53553 12.0962 6.01041 12.0962 6.3033 11.8033C6.59619 11.5104 6.59619 11.0355 6.3033 10.7426L2.06066 6.5L6.3033 2.25736C6.59619 1.96446 6.59619 1.48959 6.3033 1.1967C6.01041 0.903804 5.53553 0.903804 5.24264 1.1967L0.469669 5.96967ZM21 6.5L21 5.75L1 5.75L1 6.5L1 7.25L21 7.25L21 6.5Z" fill="white"/>
+          </svg>
+        </button>
+        <button class="blog-carousel__nav-button" id="next-{{ section.id }}" aria-label="Next">
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="13" viewBox="0 0 21 13" fill="none">
+            <path d="M20.5303 7.03033C20.8232 6.73744 20.8232 6.26256 20.5303 5.96967L15.7574 1.1967C15.4645 0.903806 14.9896 0.903806 14.6967 1.1967C14.4038 1.48959 14.4038 1.96447 14.6967 2.25736L18.9393 6.5L14.6967 10.7426C14.4038 11.0355 14.4038 11.5104 14.6967 11.8033C14.9896 12.0962 15.4645 12.0962 15.7574 11.8033L20.5303 7.03033ZM0 6.5V7.25H20V6.5V5.75H0V6.5Z" fill="white"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="blog-carousel__container" id="carousel-{{ section.id }}" style="overflow: hidden;">
+      <div class="blog-carousel__grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'blog_article' and block.settings.article != blank %}
+            <div class="blog-carousel__item" {{ block.shopify_attributes }}>
+              <a href="{{ block.settings.article.url }}">
+                <div class="blog-carousel__image-container">
+                  {% if block.settings.article.image %}
+                    <img 
+                      class="blog-carousel__image" 
+                      src="{{ block.settings.article.image | img_url: 'master' }}" 
+                      alt="{{ block.settings.article.image.alt | escape }}"
+                      loading="lazy"
+                    >
+                  {% else %}
+                    <div class="blog-carousel__image" style="background-color: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+                      <span style="color: #666;">No Image</span>
+                    </div>
+                  {% endif %}
+                </div>
+              </a>
+              
+              <div class="blog-carousel__content">
+                <h3 class="blog-carousel__item-title">
+                  <a href="{{ block.settings.article.url }}">{{ block.settings.article.title }}</a>
+                </h3>
+                <p class="blog-carousel__item-excerpt">
+                  {% if block.settings.article.excerpt != blank %}
+                    {{ block.settings.article.excerpt | strip_html | truncate: 120 }}
+                  {% else %}
+                    {{ block.settings.article.content | strip_html | truncate: 120 }}
+                  {% endif %}
+                </p>
+                <a href="{{ block.settings.article.url }}" class="blog-carousel__read-more">
+                  Read More
+                </a>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const carousel = document.getElementById('carousel-{{ section.id }}');
+  const prevButton = document.getElementById('prev-{{ section.id }}');
+  const nextButton = document.getElementById('next-{{ section.id }}');
+  
+  if (!carousel || !prevButton || !nextButton) return;
+  
+  const items = carousel.querySelectorAll('.blog-carousel__item');
+  let currentIndex = 0;
+  const articlesToShow = {{ section.settings.articles_to_show | default: 2 }};
+  let itemsPerView = window.innerWidth <= 768 ? 1 : window.innerWidth <= 1024 ? Math.min(1.5, articlesToShow) : articlesToShow;
+  
+  function updateCarousel() {
+    const container = carousel.querySelector('.blog-carousel__grid');
+    const itemWidth = 100 / itemsPerView;
+    const translateX = -(currentIndex * itemWidth);
+    
+    // Smooth horizontal slide
+    container.style.transform = `translateX(${translateX}%)`;
+    
+    // Update button states
+    updateButtonStates();
+  }
+  
+  function updateButtonStates() {
+    // Calculate max index based on items per view
+    let maxIndex;
+    if (itemsPerView === 1.5) {
+      // For 1.5 mode, we can show items 0-1, 1-2, 2-3, etc.
+      maxIndex = Math.max(0, items.length - 1);
+    } else {
+      maxIndex = Math.max(0, items.length - Math.ceil(itemsPerView));
+    }
+    
+    // Disable/enable previous button
+    if (currentIndex <= 0) {
+      prevButton.disabled = true;
+      prevButton.setAttribute('aria-disabled', 'true');
+    } else {
+      prevButton.disabled = false;
+      prevButton.setAttribute('aria-disabled', 'false');
+    }
+    
+    // Disable/enable next button
+    if (currentIndex >= maxIndex) {
+      nextButton.disabled = true;
+      nextButton.setAttribute('aria-disabled', 'true');
+    } else {
+      nextButton.disabled = false;
+      nextButton.setAttribute('aria-disabled', 'false');
+    }
+  }
+  
+  function nextSlide() {
+    // Calculate max index based on items per view
+    let maxIndex;
+    if (itemsPerView === 1.5) {
+      maxIndex = Math.max(0, items.length - 1);
+    } else {
+      maxIndex = Math.max(0, items.length - Math.ceil(itemsPerView));
+    }
+    
+    if (currentIndex < maxIndex) {
+      currentIndex = Math.min(currentIndex + 1, maxIndex);
+      updateCarousel();
+    }
+  }
+  
+  function prevSlide() {
+    if (currentIndex > 0) {
+      currentIndex = Math.max(0, currentIndex - 1);
+      updateCarousel();
+    }
+  }
+  
+  // Add click handlers with animation
+  prevButton.addEventListener('click', function() {
+    if (!this.disabled) {
+      this.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        this.style.transform = 'scale(1)';
+      }, 150);
+      prevSlide();
+    }
+  });
+  
+  nextButton.addEventListener('click', function() {
+    if (!this.disabled) {
+      this.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        this.style.transform = 'scale(1)';
+      }, 150);
+      nextSlide();
+    }
+  });
+  
+  // Add keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft' && !prevButton.disabled) {
+      prevSlide();
+    } else if (e.key === 'ArrowRight' && !nextButton.disabled) {
+      nextSlide();
+    }
+  });
+  
+  // Update on resize with debounce
+  let resizeTimeout;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      const newItemsPerView = window.innerWidth <= 768 ? 1 : window.innerWidth <= 1024 ? Math.min(1.5, articlesToShow) : articlesToShow;
+      if (newItemsPerView !== itemsPerView) {
+        itemsPerView = newItemsPerView;
+        currentIndex = 0; // Reset to first slide
+        updateCarousel();
+      }
+    }, 250);
+  });
+  
+  // Update item widths based on screen size
+  function updateItemWidths() {
+    items.forEach((item) => {
+      if (window.innerWidth <= 768) {
+        item.style.flex = '0 0 100%';
+        item.style.minWidth = '100%';
+      } else if (window.innerWidth <= 1024) {
+        item.style.flex = '0 0 calc(66.666% - 1rem)';
+        item.style.minWidth = 'calc(66.666% - 1rem)';
+      } else {
+        item.style.flex = '0 0 calc(50% - 1rem)';
+        item.style.minWidth = 'calc(50% - 1rem)';
+      }
+    });
+  }
+  
+  // Initialize with animation
+  setTimeout(() => {
+    updateItemWidths();
+    updateCarousel();
+  }, 100);
+});
+</script>
+
+{% schema %}
+{
+  "name": "Blog Carousel",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Media Presence"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#2c2c2c"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "excerpt_color",
+      "label": "Excerpt Color",
+      "default": "#cccccc"
+    },
+    {
+      "type": "color",
+      "id": "read_more_color",
+      "label": "Read More Link Color",
+      "default": "#ffd700"
+    },
+    {
+      "type": "range",
+      "id": "articles_to_show",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "Number of articles to show at once",
+      "default": 2,
+      "info": "How many articles to display in the carousel at once"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "blog_article",
+      "name": "Blog Article",
+      "settings": [
+        {
+          "type": "article",
+          "id": "article",
+          "label": "Select Blog Article"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blog Carousel",
+      "blocks": [
+        {
+          "type": "blog_article"
+        },
+        {
+          "type": "blog_article"
+        },
+        {
+          "type": "blog_article"
+        },
+        {
+          "type": "blog_article"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20
+}
+{% endschema %}

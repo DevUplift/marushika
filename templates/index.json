@@ -11,6 +11,7 @@
   "sections": {
     "media_banner_LpMizt": {
       "type": "media-banner",
+      "disabled": true,
       "name": "Media Banner",
       "settings": {
         "media_type": "video",
@@ -23,8 +24,140 @@
         "banner_button_link": "shopify://collections/silk-scarf"
       }
     },
+    "collection_banner_wj4Kbf": {
+      "type": "collection-banner",
+      "name": "Collection Banner",
+      "settings": {
+        "video_file": "shopify://files/videos/Main Website Banner.mp4",
+        "image_alt": "Collection Banner",
+        "title": "MEHEROON COLLECTION 2025",
+        "description": "Our latest collection brings together timeless designs and modern comfort, made to elevate your everyday style.",
+        "text_position": "below",
+        "text_alignment": "flex-start",
+        "title_size": 48,
+        "description_size": 16,
+        "title_color": "#333333",
+        "description_color": "#666666",
+        "text_background_color": "#ffffff"
+      }
+    },
+    "category_collage_kqYkDN": {
+      "type": "category-collage",
+      "blocks": {
+        "collage_item_rQaYrp": {
+          "type": "collage_item",
+          "settings": {
+            "title": "Dresses",
+            "subtitle": "Explore Category",
+            "image": "shopify://shop_images/Pop-up_image_916d710c-183c-4f94-88af-5b4f2fbb9962.png",
+            "link": "",
+            "size": "small"
+          }
+        },
+        "collage_item_hDjfNe": {
+          "type": "collage_item",
+          "settings": {
+            "title": "Jumpsuits",
+            "subtitle": "Explore Category",
+            "image": "shopify://shop_images/IMG_4239-min.jpg",
+            "link": "",
+            "size": "small"
+          }
+        },
+        "collage_item_dxNVrX": {
+          "type": "collage_item",
+          "settings": {
+            "title": "Scarfs",
+            "subtitle": "Explore Category",
+            "image": "shopify://shop_images/Marushika_61724-min_1.jpg",
+            "link": "",
+            "size": "large"
+          }
+        }
+      },
+      "block_order": [
+        "collage_item_rQaYrp",
+        "collage_item_hDjfNe",
+        "collage_item_dxNVrX"
+      ],
+      "name": "Category Collage",
+      "settings": {
+        "section_title": "Shop by Category"
+      }
+    },
+    "the_experience_ijBL8Q": {
+      "type": "the-experience",
+      "name": "The Experience",
+      "settings": {
+        "image_file": "shopify://shop_images/showroom.png",
+        "image_alt": "The Experience",
+        "title": "The Marushika Experience",
+        "description": "Our luxurious space offers an intimate setting for exploring our collections, thoughtfully curated for the woman of today. Our Stylist will elevate your visit with a curated experience to suit your personal style and the occasion.",
+        "text_alignment": "flex-start",
+        "booking_alignment": "flex-start",
+        "title_size": 48,
+        "description_size": 16,
+        "title_color": "#333333",
+        "description_color": "#666666",
+        "text_background_color": "#ffffff",
+        "booking_background_color": "#ffffff",
+        "booking_url": "shopify://pages/booking",
+        "booking_text": "Book Your Experience",
+        "link_color": "#000000",
+        "link_hover_color": "#333333",
+        "link_size": 16
+      }
+    },
+    "blog_carousel_qR7WW6": {
+      "type": "blog-carousel",
+      "blocks": {
+        "blog_article_aBdHKz": {
+          "type": "blog_article",
+          "settings": {
+            "article": "news/luxury-occasion-wear-inspired-by-the-timeless-beauty-of-madhubani"
+          }
+        },
+        "blog_article_kNdgMg": {
+          "type": "blog_article",
+          "settings": {
+            "article": "news/تألقي-بأزياء-تحاكي-القطع-الفنية-ذات-التصاميم-المعاصرة-من-ماروشيكا"
+          }
+        },
+        "blog_article_GGmGjf": {
+          "type": "blog_article",
+          "settings": {
+            "article": "news/marushika-s-debut-collection-idaya-sets-a-new-standard-in-luxury-fashion"
+          }
+        },
+        "blog_article_atbHBr": {
+          "type": "blog_article",
+          "settings": {
+            "article": "news/مجموعة-علامة-ماروشيكا-للأزياء-الأولى-ترسي-معياراً-جديداً-في-مشهد-الأزياء-الفاخرة"
+          }
+        }
+      },
+      "block_order": [
+        "blog_article_aBdHKz",
+        "blog_article_kNdgMg",
+        "blog_article_GGmGjf",
+        "blog_article_atbHBr"
+      ],
+      "name": "Blog Carousel",
+      "settings": {
+        "heading": "Media Presence",
+        "background_color": "#212121",
+        "text_color": "#ffffff",
+        "title_color": "#ffffff",
+        "excerpt_color": "#cccccc",
+        "read_more_color": "#ffd700",
+        "articles_to_show": 2,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "triple_pic_section_pAYFHV": {
       "type": "triple-pic-section",
+      "disabled": true,
       "settings": {
         "subtitle": "The Art Behind the Outfit",
         "title": "Craftsmanship and Inspiration",
@@ -38,6 +171,7 @@
     },
     "collection_display_section_F4rhDi": {
       "type": "collection-display-section",
+      "disabled": true,
       "settings": {
         "double_line_sub_title": "WHERE LUXURY MEETS ART",
         "double_line_text": "Marushika emerges from the confluence of art and fashion, dedicated to creating wearable art that transcends place and time. Founded in the UAE by Manisha Verma, we have developed a Ready-to-Wear collection of meticulously curated pieces that blend traditional art forms with modern designs.",
@@ -84,6 +218,7 @@
     },
     "one_pic_section_qXP8g6": {
       "type": "one-pic-section",
+      "disabled": true,
       "settings": {
         "triple_line_sub_title": "Elevating the Art of Shopping",
         "triple_line_title": "The Marushika Boutique Experience",
@@ -139,6 +274,7 @@
         "blog_4myFxd",
         "blog_pHBf3F"
       ],
+      "disabled": true,
       "settings": {
         "triple_line_sub_title": "In the Spotlight",
         "triple_line_title": "Press & Media Features",
@@ -150,6 +286,10 @@
   },
   "order": [
     "media_banner_LpMizt",
+    "collection_banner_wj4Kbf",
+    "category_collage_kqYkDN",
+    "the_experience_ijBL8Q",
+    "blog_carousel_qR7WW6",
     "triple_pic_section_pAYFHV",
     "collection_display_section_F4rhDi",
     "image_carousel_eiwbfK",
