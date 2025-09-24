@@ -1,0 +1,419 @@
+<style>
+  .the-experience-section {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .the-experience-video-container {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    min-height: 500px;
+    overflow: hidden;
+  }
+
+  .the-experience-background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .the-experience-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: {{ section.settings.text_alignment }};
+    padding: 6rem calc(4.8rem + var(--grid-mobile-horizontal-spacing));
+    background-color: {{ section.settings.text_background_color }};
+    text-align: {{ section.settings.text_alignment }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .the-experience-container {
+      padding: 6rem calc(4.8rem + var(--grid-desktop-horizontal-spacing));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .the-experience-video-container {
+      height: 50vh;
+      min-height: 400px;
+    }
+    
+    .the-experience-container {
+      padding: 6rem 2.4rem;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+
+  .the-experience-content {
+    position: relative;
+    max-width: 800px;
+    text-align: {{ section.settings.text_alignment }};
+  }
+
+  @media (max-width: 768px) {
+    .the-experience-content {
+      max-width: 100%;
+      text-align: center;
+    }
+  }
+
+  .the-experience-title {
+    color: {{ section.settings.title_color }};
+    font-family: 'Gretha', sans-serif;
+    font-size: {{ section.settings.title_size }}px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 768px) {
+    .the-experience-title {
+      font-size: {{ section.settings.title_size | times: 0.7 }}px;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .the-experience-description {
+    color: {{ section.settings.description_color }};
+    font-size: {{ section.settings.description_size }}px;
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: 0;
+    max-width: 800px;
+  }
+
+  @media (max-width: 768px) {
+    .the-experience-description {
+      font-size: {{ section.settings.description_size | times: 0.9 }}px;
+    }
+  }
+
+  .the-experience-booking-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: {{ section.settings.booking_alignment }};
+    padding: 3rem 4.8rem;
+    background-color: {{ section.settings.booking_background_color }};
+    text-align: {{ section.settings.booking_alignment }};
+  }
+
+  @media (max-width: 768px) {
+    .the-experience-booking-container {
+      padding: 3rem 2.4rem;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+
+
+  /* Animation classes */
+  .scroll-trigger.animate--fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .scroll-trigger.animate--fade-in.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scroll-trigger.animate--slide-in {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .scroll-trigger.animate--slide-in.animate {
+    opacity: 1;
+    transform: translateX(0);
+  }
+</style>
+
+<section class="the-experience-section" id="TheExperience-{{ section.id }}">
+  <!-- Text Content Container (Always Above Video) -->
+  <div class="the-experience-container">
+    <div class="the-experience-content scroll-trigger animate--fade-in">
+      {% if section.settings.title != blank %}
+        <h1 class="the-experience-title">
+          {{ section.settings.title }}
+        </h1>
+      {% endif %}
+      
+      {% if section.settings.description != blank %}
+        <div class="the-experience-description">
+          {{ section.settings.description }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Video/Image Container -->
+  <div class="the-experience-video-container">
+    {% if section.settings.video_file != blank %}
+      <video 
+        autoplay 
+        muted 
+        loop 
+        playsinline 
+        oncontextmenu="return false;" 
+        preload="auto" 
+        class="the-experience-background"
+      >
+        <source src="{{ section.settings.video_file.sources[1].url }}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    {% elsif section.settings.image_file != blank %}
+      <img 
+        src="{{ section.settings.image_file | img_url: 'master' }}" 
+        alt="{{ section.settings.image_alt | default: 'The Experience' }}" 
+        class="the-experience-background" 
+        loading="lazy"
+      >
+    {% else %}
+      <div class="the-experience-background" style="background-color: #f5f5f5;"></div>
+    {% endif %}
+  </div>
+
+  <!-- Booking Link Container (Below Video) -->
+  {% if section.settings.booking_url != blank and section.settings.booking_text != blank %}
+    <div class="the-experience-booking-container">
+      <div class="scroll-trigger animate--fade-in">
+        {% render 'booking-link', 
+          booking_url: section.settings.booking_url,
+          booking_text: section.settings.booking_text,
+          link_color: section.settings.link_color,
+          link_hover_color: section.settings.link_hover_color,
+          link_size: section.settings.link_size
+        %}
+      </div>
+    </div>
+  {% endif %}
+</section>
+
+<script>
+  // Simple scroll animation trigger
+  document.addEventListener('DOMContentLoaded', function() {
+    const elements = document.querySelectorAll('.scroll-trigger');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+    
+    elements.forEach(element => {
+      observer.observe(element);
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "The Experience",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Media Settings"
+    },
+    {
+      "type": "video",
+      "id": "video_file",
+      "label": "Background Video",
+      "info": "Upload a video file for the background"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_file",
+      "label": "Background Image",
+      "info": "Fallback image if no video is provided"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image Alt Text",
+      "default": "The Experience"
+    },
+    {
+      "type": "header",
+      "content": "Text Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "The Marushika Experience"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Our luxurious space offers an intimate setting for exploring our collections, thoughtfully curated for the woman of today. Our Stylist will elevate your visit with a curated experience to suit your personal style and the occasion."
+    },
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "booking_alignment",
+      "label": "Booking Button Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Typography Settings"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Title Size",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Size",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Color Settings"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "text_background_color",
+      "label": "Text Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "booking_background_color",
+      "label": "Booking Section Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Booking Link Settings"
+    },
+    {
+      "type": "url",
+      "id": "booking_url",
+      "label": "Booking Link URL",
+      "info": "Enter the URL for the booking link"
+    },
+    {
+      "type": "text",
+      "id": "booking_text",
+      "label": "Booking Link Text",
+      "default": "Book Your Experience"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Link Hover Color",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "link_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Link Size",
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "The Experience",
+      "settings": {
+        "title": "The Marushika Experience",
+        "description": "Our luxurious space offers an intimate setting for exploring our collections, thoughtfully curated for the woman of today. Our Stylist will elevate your visit with a curated experience to suit your personal style and the occasion.",
+        "booking_text": "Book Your Experience"
+      }
+    }
+  ]
+}
+{% endschema %}
