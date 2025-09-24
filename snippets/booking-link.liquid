@@ -1,0 +1,45 @@
+<style>
+  .booking-link {
+    display: inline-block;
+    color: {{ link_color | default: '#000000' }};
+    text-decoration: none;
+    font-size: {{ link_size | default: '16' }}px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    padding: 0.5rem 0;
+  }
+
+  .booking-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: {{ link_color | default: '#000000' }};
+    transition: all 0.3s ease;
+  }
+
+  .booking-link:hover {
+    color: {{ hover_color | default: '#333333' }};
+    transform: translateY(-1px);
+  }
+
+  .booking-link:hover::after {
+    background-color: {{ hover_color | default: '#333333' }};
+  }
+
+  @media (max-width: 768px) {
+    .booking-link {
+      font-size: {{ link_size | times: 0.9 | default: '14' }}px;
+    }
+  }
+</style>
+
+<a href="{{ booking_url }}" class="booking-link">
+  {{ booking_text | default: 'Book Your Experience' }}
+</a>
